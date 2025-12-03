@@ -1,0 +1,9 @@
+.spinner {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 1rem;
+
+  background-image: url('./assets/Margarita.png');
+  background-size: contain;
+  background-position: center;
+}
