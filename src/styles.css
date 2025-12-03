@@ -1,0 +1,62 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+h1,
+h2,
+h3,
+.font-display {
+  font-family: 'Cormorant Upright', serif;
+}
+
+button,
+.btn,
+.btn-primary,
+.btn-secondary,
+[role='button'] {
+  cursor: pointer;
+}
+
+a,
+[onclick],
+[ng-click] {
+  cursor: pointer;
+}
+
+@theme {
+  --color-text: #2d3748;
+  --color-background: #f7fafc;
+  --color-primary: #744c3e;
+  --color-secondary: #c9a689;
+  --color-accent: #d4a5a5;
+  --color-success: #8fa998;
+  --color-error: #b85450;
+  --color-border: #e8e3df;
+}
+
+:root {
+  --color-base-100: #f7fafc;
+  --color-base-200: #e8e3df; 
+  --color-base-300: #744c3e; 
+  --color-base-content: #2d3748;
+}
+
+/* Componentes custom */
+@layer components {
+  .btn-primary {
+    @apply text-background bg-primary px-4 py-2 hover:bg-success whitespace-nowrap font-semibold rounded-lg transition-all transform hover:scale-105 shadow-xl cursor-pointer;
+  }
+  
+  .btn-secondary {
+    @apply text-background bg-secondary px-4 py-2 rounded-lg hover:opacity-75 whitespace-nowrap transition-all font-medium cursor-pointer;
+  }
+}
