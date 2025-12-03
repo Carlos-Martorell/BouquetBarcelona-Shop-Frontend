@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 @plugin "daisyui";
 
 html,
@@ -45,8 +45,8 @@ a,
 
 :root {
   --color-base-100: #f7fafc;
-  --color-base-200: #e8e3df; 
-  --color-base-300: #744c3e; 
+  --color-base-200: #e8e3df;
+  --color-base-300: #744c3e;
   --color-base-content: #2d3748;
 }
 
@@ -55,7 +55,7 @@ a,
   .btn-primary {
     @apply text-background bg-primary px-4 py-2 hover:bg-success whitespace-nowrap font-semibold rounded-lg transition-all transform hover:scale-105 shadow-xl cursor-pointer;
   }
-  
+
   .btn-secondary {
     @apply text-background bg-secondary px-4 py-2 rounded-lg hover:opacity-75 whitespace-nowrap transition-all font-medium cursor-pointer;
   }
