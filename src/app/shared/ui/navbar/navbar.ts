@@ -1,20 +1,23 @@
-import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
-import { IconCart } from './components/icon-cart/icon-cart';
+import { Component, inject } from '@angular/core';
+import { RouterLink, RouterLinkActive, Router } from '@angular/router';
+import { AuthService } from '@auth';
+
 
 @Component({
   selector: 'app-navbar',
-  // imports: [RouterLink, RouterLinkActive, IconCart],
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
-  imports: [IconCart],
 })
 export class Navbar {
 
-  // authService = inject(AuthService);
+  authService = inject(AuthService);
+  router = inject(Router)
   
-  // onLogout() {
-  //   this.authService.logout();
-  // }
+  onLogout() {
+    this.authService.logout();
+    this.router.navigate(['/'])
+
+  }
 
 }

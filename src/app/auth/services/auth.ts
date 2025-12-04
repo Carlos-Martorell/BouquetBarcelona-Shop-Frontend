@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { computed, inject, Injectable, signal } from '@angular/core';
+import { computed, inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginResponse, RegisterData, User } from '@auth';
 import { switchMap, tap } from 'rxjs/operators';
 import { environment } from '@env/environments';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +12,7 @@ import { environment } from '@env/environments';
 export class AuthService {
   private http = inject(HttpClient);
   private router = inject(Router);
+  private platformId = inject(PLATFORM_ID);
 
   private readonly apiUrl = `${environment.apiUrl}/api/auth`;
 
@@ -37,34 +39,42 @@ export class AuthService {
       .pipe(switchMap(() => this.login(data.email, data.password)));
   }
 
+    logout() {
+    this.clearAuth();
+    this.router.navigate(['/']);
+  }
+
   private setAuth(token: string, user: User) {
     this.tokenSignal.set(token);
     this.currentUserSignal.set(user);
 
-    localStorage.setItem('token', token);
-    localStorage.setItem('user', JSON.stringify(user));
+ if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify(user));
+    }
   }
 
   private clearAuth() {
     this.tokenSignal.set(null);
     this.currentUserSignal.set(null);
 
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-  }
-
-  private loadFromStorage() {
-    const token = localStorage.getItem('token');
-    const userJson = localStorage.getItem('user');
-
-    if (token && userJson) {
-      this.tokenSignal.set(token);
-      this.currentUserSignal.set(JSON.parse(userJson));
+  if (isPlatformBrowser(this.platformId)) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
     }
   }
 
-  logout() {
-    this.clearAuth();
-    this.router.navigate(['/login']);
+  private loadFromStorage() {
+      if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('token');
+      const userJson = localStorage.getItem('user');
+
+      if (token && userJson) {
+        this.tokenSignal.set(token);
+        this.currentUserSignal.set(JSON.parse(userJson));
+      }
+    }
   }
+
+
 }

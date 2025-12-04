@@ -1,59 +1,54 @@
-# BouquetShop
+JWT tokens (stored in localStorage)
+Signals for reactive state
+Functional guards (Angular 20+)
+HTTP interceptor for automatic token injection
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.8.
+SSR Compatibility:
+The AuthService is SSR-ready using isPlatformBrowser() to safely access localStorage only in the browser context:
+typescriptimport { PLATFORM_ID, inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
-## Development server
+private platformId = inject(PLATFORM_ID);
 
-To start a local development server, run:
+private loadFromStorage() {
+  if (isPlatformBrowser(this.platformId)) {
+    // Safe to use localStorage here
+    const token = localStorage.getItem('token');
+    // ...
+  }
+}
 
-```bash
-ng serve
+Features:
+
+✅ Login / Register with reactive forms
+✅ Auto-login after registration
+✅ Token persistence in localStorage
+✅ JWT interceptor (adds token to all requests)
+✅ Route guards (authGuard, guestGuard)
+✅ Role-based access (admin/user)
+✅ SSR compatible (no localStorage errors)
+
+Guards:
+// Protect routes requiring authentication
+{
+  path: 'orders',
+  canActivate: [authGuard],
+  loadComponent: () => import('./orders/pages/orders-list')
+}
+
+// Redirect logged users away from auth pages
+{
+  path: 'login',
+  canActivate: [guestGuard],
+  loadComponent: () => import('./auth/pages/login')
+}
+
+State Management:
+// Read-only signals (components can't mutate)
+readonly currentUser = this.currentUserSignal.asReadonly();
+readonly token = this.tokenSignal.asReadonly();
+
+// Computed properties
+readonly isLoggedIn = computed(() => !!this.token());
+readonly isAdmin = computed(() => this.currentUser()?.role === 'admin');
 ```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
