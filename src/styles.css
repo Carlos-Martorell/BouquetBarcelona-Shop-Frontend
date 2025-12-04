@@ -18,6 +18,59 @@ h3,
   font-family: 'Cormorant Upright', serif;
 }
 
+[data-theme="bouquet"] {
+  /* Colores principales de DaisyUI */
+  --p: 28 32 24;           /* primary: #744c3e (chocolate) */
+  --pf: 24 28 20;          /* primary-focus */
+  --pc: 247 250 252;       /* primary-content (texto sobre primary) */
+  
+  --s: 47 27 19;           /* secondary: #c9a689 (arena) */
+  --sf: 43 23 15;          /* secondary-focus */
+  --sc: 247 250 252;       /* secondary-content */
+  
+  --a: 55 28 28;           /* accent: #d4a5a5 (rosa viejo) */
+  --af: 51 24 24;          /* accent-focus */
+  --ac: 247 250 252;       /* accent-content */
+  
+  --n: 45 55 72;           /* neutral: #2d3748 (texto) */
+  --nf: 41 51 68;          /* neutral-focus */
+  --nc: 247 250 252;       /* neutral-content */
+  
+  --b1: 247 250 252;       /* base-100: #f7fafc (background) */
+  --b2: 232 227 223;       /* base-200: #e8e3df (border) */
+  --b3: 220 215 211;       /* base-300 */
+  --bc: 45 55 72;          /* base-content: #2d3748 (texto) */
+  
+  --su: 47 42 40;          /* success: #8fa998 (salvia) */
+  --suc: 247 250 252;      /* success-content */
+  
+  --er: 48 28 26;          /* error: #b85450 (burdeos) */
+  --erc: 247 250 252;      /* error-content */
+  
+  --in: 47 42 40;          /* info */
+  --inc: 247 250 252;      /* info-content */
+  
+  --wa: 55 28 28;          /* warning */
+  --wac: 247 250 252;      /* warning-content */
+  
+  /* Bordes redondeados */
+  --rounded-box: 0.75rem;
+  --rounded-btn: 0.5rem;
+  --rounded-badge: 1.9rem;
+  
+  /* Animaciones */
+  --animation-btn: 0.25s;
+  --animation-input: 0.2s;
+  
+  /* Botones */
+  --btn-focus-scale: 0.95;
+  --border-btn: 1px;
+  
+  /* Inputs */
+  --tab-border: 1px;
+  --tab-radius: 0.5rem;
+}
+
 button,
 .btn,
 .btn-primary,
@@ -44,12 +97,8 @@ a,
 }
 
 :root {
-  --color-base-100: #f7fafc;
-  --color-base-200: #e8e3df;
-  --color-base-300: #744c3e;
-  --color-base-content: #2d3748;
+  color-scheme: light;
 }
-
 @layer components {
   .btn-primary {
     @apply text-background bg-primary px-4 py-2 hover:bg-success whitespace-nowrap font-semibold rounded-lg transition-all transform hover:scale-105 shadow-xl cursor-pointer;

@@ -8,11 +8,11 @@ export const routes: Routes = [
         path: '',
         component: MainLayout,
         children: [
-            // {
-            //     path: '', 
-            //     loadComponent: () => import('./catalog/pages/catalog-list/catalog-list').then(m => m.CatalogList),
-            //     title: 'Catálogo Principal',
-            // },
+            {
+                path: '', 
+                loadComponent: () => import('./catalog/pages/catalog-list/catalog-list').then(m => m.CatalogList),
+                title: 'Catálogo Principal',
+            },
             ]
     },
 {
