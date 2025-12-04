@@ -50,7 +50,6 @@ a,
   --color-base-content: #2d3748;
 }
 
-/* Componentes custom */
 @layer components {
   .btn-primary {
     @apply text-background bg-primary px-4 py-2 hover:bg-success whitespace-nowrap font-semibold rounded-lg transition-all transform hover:scale-105 shadow-xl cursor-pointer;
