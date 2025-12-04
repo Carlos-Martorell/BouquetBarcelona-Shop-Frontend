@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import {  Component, inject, signal } from '@angular/core';
 import { AbstractControl, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { AuthService } from '@core/services/auth/auth';
-import { NotificationService } from '@core/services/toast/notification';
+import { AuthService } from '@auth';
+import { NotificationService } from '@shared';
 
 @Component({
   selector: 'app-register',
