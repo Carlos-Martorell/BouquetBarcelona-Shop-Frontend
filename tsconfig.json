@@ -16,12 +16,18 @@
     "@app/*": [
         "./src/app/*"
       ],
+            "@env/*": [
+        "./src/environments/*" 
+      ],
       "@shared/*": [
         "./src/app/shared/*"
       ],
       "@shared": [
         "./src/app/shared/index.ts" 
-      ]
+      ],
+      "@auth": [
+        "./src/app/auth/index.ts" 
+      ],
     }
   },
   "angularCompilerOptions": {
