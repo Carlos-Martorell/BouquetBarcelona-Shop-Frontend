@@ -28,6 +28,12 @@
       "@auth": [
         "./src/app/auth/index.ts" 
       ],
+      "@catalog": [
+        "./src/app/catalog/index.ts" 
+      ],
+      "@cart": [
+        "./src/app/cart/index.ts" 
+      ],
     }
   },
   "angularCompilerOptions": {
