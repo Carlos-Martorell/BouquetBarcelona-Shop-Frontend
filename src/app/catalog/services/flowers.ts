@@ -23,5 +23,4 @@ export class FlowersService {
       .pipe(tap(flowers => this.flowersSignal.set(flowers)));
   }
 
-  
 }
