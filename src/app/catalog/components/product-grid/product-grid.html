@@ -1,1 +1,3 @@
-<p>product-grid works!</p>
+@for(flower of flowers(); track flower._id){
+    <app-flower-card [flower]="flower" />
+}

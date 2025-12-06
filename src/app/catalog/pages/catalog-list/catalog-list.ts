@@ -1,23 +1,24 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { Flower, FlowersService } from '@app/catalog';
+import { Flower, FlowersService, ProductGrid } from '@catalog';
 
 @Component({
   selector: 'app-catalog-list',
-  imports: [],
+  imports: [ProductGrid],
   templateUrl: './catalog-list.html',
   styleUrl: './catalog-list.css',
 })
 export class CatalogList {
 
-    private flowersService = inject(FlowersService)
-
-  flowers = this.flowersService.flowers()
+  private flowersService = inject(FlowersService)
+  private flowersSignal = this.flowersService.flowers()
+  readonly flowers = this.flowersSignal.
 
   isLoading = signal(false);
   errorMessage = signal<string | null>(null);
-  
-  flowerCount = computed(() => this.flowersService.flowers().length);
-  hasFlowers = computed(() => this.flowerCount() > 0);
+
+    ngOnInit() {
+    this.loadFlowers();  
+  }
    
   loadFlowers() {
     this.isLoading.set(true);

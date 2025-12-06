@@ -1,1 +1,97 @@
-<p>product-detail works!</p>
+
+<div class="container mx-auto px-4 py-8">
+  
+  @if (loading()) {
+    <div class="flex justify-center py-20">
+      <div class="loading loading-spinner loading-lg text-primary"></div>
+    </div>
+  }
+
+  @if (flower()) {
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <div>
+        <figure class="aspect-square rounded-lg overflow-hidden border-2 border-border mb-4">
+          <img 
+            [src]="flower()!.images[selectedImage()]" 
+            [alt]="flower()!.name"
+            class="w-full h-full object-cover"
+          />
+        </figure>
+
+        <div class="flex gap-2 overflow-x-auto">
+          @for (image of flower()!.images; track $index) {
+            <button
+              (click)="selectImage($index)"
+              [class.ring-2]="selectedImage() === $index"
+              [class.ring-primary]="selectedImage() === $index"
+              class="w-20 h-20 rounded-lg overflow-hidden border border-border flex-shrink-0">
+              <img 
+                [src]="image" 
+                [alt]="'Imagen ' + ($index + 1)"
+                class="w-full h-full object-cover"
+              />
+            </button>
+          }
+        </div>
+      </div>
+
+      <div class="flex flex-col">
+        
+        <h1 class="text-4xl font-display font-bold text-primary mb-4">
+          {{ flower()!.name }}
+        </h1>
+        
+        <p class="text-3xl font-bold text-secondary mb-6">
+          {{ flower()!.price }}€
+        </p>
+
+        <p class="text-text mb-6 leading-relaxed">
+          {{ flower()!.description }}
+        </p>
+
+        <div class="flex flex-wrap gap-2 mb-6">
+          <span class="badge badge-lg bg-accent/20 text-accent">
+            {{ flower()!.category }}
+          </span>
+          @for (color of flower()!.colors; track color) {
+            <span class="badge badge-lg bg-secondary/20 text-secondary">
+              {{ color }}
+            </span>
+          }
+        </div>
+
+        @if (flower()!.stock > 0) {
+          <p class="text-success mb-6">
+            ✓ Disponible
+          </p>
+        } @else {
+          <p class="text-error mb-6">
+            ✗ Agotado
+          </p>
+        }
+
+        <button 
+          (click)="addToCart()"
+          [disabled]="flower()!.stock === 0"
+          class="btn btn-primary btn-lg w-full mb-4">
+          🛒 Añadir al carrito
+        </button>
+
+        @if (flower()!.careInstructions) {
+          <div class="collapse collapse-arrow bg-base-200 mt-4">
+            <input type="checkbox" /> 
+            <div class="collapse-title text-lg font-medium">
+              💧 Cuidados y conservación
+            </div>
+            <div class="collapse-content"> 
+              <p>{{ flower()!.careInstructions }}</p>
+            </div>
+          </div>
+        }
+
+      </div>
+
+    </div>
+  }
+
+</div>

@@ -4,6 +4,10 @@ export interface Flower {
   price: number;
   description: string;
   category: string;
-  images: string[];
   stock: number;
+  images: string[];
+  size: string;
+  colors: string[];
+  occasion: string;
+  careInstructions?: string;
 }

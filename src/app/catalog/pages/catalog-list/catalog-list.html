@@ -1,6 +1,33 @@
-    <div class="container mx-auto px-4 py-8">
-      <h1 class="text-4xl font-display font-bold text-primary mb-8">
-        🌸 Catálogo de Flores
-      </h1>
-      <p class="text-text">Aquí aparecerán los productos...</p>
+
+<div class="container mx-auto px-4 py-8">
+  
+  <header class="mb-8 text-center">
+    <h1 class="text-4xl md:text-5xl font-display font-bold text-primary mb-4">
+      🌸 Nuestros Ramos
+    </h1>
+    <p class="text-xl text-text/70">
+      Flores frescas para cada ocasión especial
+    </p>
+  </header>
+
+  @if (isLoading()) {
+    <div class="flex justify-center py-20">
+      <div class="loading loading-spinner loading-lg text-primary"></div>
     </div>
+  }
+
+  @if (!isLoading()) {
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      @for (flower of flowersService.flowers(); track flower._id) {
+        <app-flower-card [flower]="flower" />
+      }
+    </div>
+  }
+
+  @if (!isLoading() && flowersService.flowers().length === 0) {
+    <div class="text-center py-20">
+      <p class="text-2xl text-text/50">No hay productos disponibles</p>
+    </div>
+  }
+
+</div>
