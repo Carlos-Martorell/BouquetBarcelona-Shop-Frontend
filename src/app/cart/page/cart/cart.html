@@ -31,18 +31,10 @@
       }
     </div>
 
-    <!-- Summary -->
     <div class="bg-base-200 rounded-lg p-6 border border-border">
-      <div class="space-y-2 mb-4">
         <div class="flex justify-between text-text">
-          <span>Subtotal:</span>
-          <span class="font-semibold">{{ cartService.cartTotal() | currency:'EUR' }}</span>
+          <span>Envío gratuito gracias a nuestro servicio de entrega 100% ecológico.</span>
         </div>
-        <div class="flex justify-between text-text">
-          <span>Envío gratuito gracias a nuestro servicio 100% ecológico.</span>
-        </div>
-      </div>
-
       <div class="divider"></div>
 
       <div class="flex justify-between text-xl font-bold text-primary mb-6">
@@ -50,12 +42,11 @@
         <span>{{ cartService.cartTotal() | currency:'EUR' }}</span>
       </div>
 
-      <!-- Actions -->
       <div class="flex gap-4">
         <button (click)="goBack()" class="btn btn-ghost flex-1">
           ← Seguir comprando
         </button>
-        <button (click)="onCheckout()" class="btn btn-primary flex-1">
+        <button (click)="onCheckout()" class="btn btn-primary bg-success border-success flex-1">
           Finalizar compra →
         </button>
       </div>

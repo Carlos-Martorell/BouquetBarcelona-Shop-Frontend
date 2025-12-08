@@ -36,7 +36,9 @@ export class CartService {
         const items = JSON.parse(stored)
         this.cartItemsSignal.set(items)
       } catch (e) {
-        console.error('Error loading cart:', e);
+        console.error('Error loading cart, clearing:', e);
+        localStorage.removeItem('cart');
+        this.cartItemsSignal.set([]);
       }
     }
   }

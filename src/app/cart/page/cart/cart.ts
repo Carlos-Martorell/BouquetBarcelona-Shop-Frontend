@@ -14,12 +14,13 @@ import { CurrencyPipe } from '@angular/common';
 export class Cart {
 
 
-onRemoveItem($event: string) {
-throw new Error('Method not implemented.');
-}
-onQuantityChange($event: { flowerId: string; quantity: number; }) {
-throw new Error('Method not implemented.');
-}
+  onQuantityChange(data: { flowerId: string, quantity: number }) {
+    this.cartService.updateQuantity(data.flowerId, data.quantity);
+  }
+
+  onRemoveItem(flowerId: string) {
+    this.cartService.removeFromCart(flowerId);
+  }
 
   cartService = inject(CartService)
   router = inject(Router);
