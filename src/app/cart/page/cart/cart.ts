@@ -29,7 +29,11 @@ throw new Error('Method not implemented.');
       this.cartService.clearCart();
     }
   }
-  
+
+  onCheckout() {
+    this.router.navigate(['/checkout']);
+  }
+
 
   goBack() {
     this.router.navigate(['/'])

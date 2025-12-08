@@ -19,6 +19,18 @@ export const routes: Routes = [
           import('./catalog/pages/product-detail/product-detail').then((m) => m.ProductDetail),
         title: 'Detalle del Producto',
       },
+      {
+        path: 'cart',
+        loadComponent: () =>
+          import('./cart/page/cart/cart').then((m) => m.Cart),
+        title: 'Cesta de Productos',
+      },
+      {
+        path: 'checkout',
+        loadComponent: () =>
+          import('./checkout/pages/checkout/checkout').then((m) => m.Checkout),
+        title: 'Checkout',
+      },
     {
             path: '**',
             redirectTo: 'catalog',
