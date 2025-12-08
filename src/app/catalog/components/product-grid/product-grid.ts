@@ -8,6 +8,5 @@ import { Flower, FlowerCard } from '@catalog';
   styleUrl: './product-grid.css',
 })
 export class ProductGrid {
-
   flowers = input.required<Flower[]>();
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Footer, Navbar, Spinner } from "@shared";
+import { Footer, Navbar, Spinner } from '@shared';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -8,6 +8,4 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './main-layout.html',
   styleUrl: './main-layout.css',
 })
-export class MainLayout {
-
-}
+export class MainLayout {}

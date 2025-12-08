@@ -1,1 +1,72 @@
-<p>search-bar works!</p>
+<form role="search">
+  <div class="collapse collapse-arrow bg-neutral/20 shadow-md rounded-lg border border-border">
+    <input type="checkbox" [checked]="isOpen()" (change)="toggleOpen()" />
+
+    <div class="collapse-title text-lg font-medium flex items-center gap-2">
+      🔍 Buscar y filtrar
+      <span class="badge badge-sm badge-accent text-text"> {{ activeFiltersCount() }} filtros activos </span>
+    </div>
+
+    <div class="collapse-content">
+      <div class="space-y-4 pt-2">
+        <div>
+          <label class="label">
+            <span class="label-text font-medium">Buscar</span>
+          </label>
+          <input
+            type="search"
+            [value]="searchValue()"
+            (input)="onSearchInput($event)"
+            placeholder="Nombre o descripción..."
+            class="input input-bordered w-full"
+          />
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="label">
+              <span class="label-text font-medium">Categoría</span>
+            </label>
+            <select
+              [value]="categoryValue()"
+              (change)="onCategoryChange($event)"
+              class="select select-bordered w-full"
+            >
+              <option value="all">Todas</option>
+              <option value="romántico">Romántico</option>
+              <option value="mediterráneo">Mediterráneo</option>
+              <option value="botánico">Botánico</option>
+              <option value="silvestre">Silvestre</option>
+              <option value="moderno">Moderno</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="label">
+              <span class="label-text font-medium">Ocasión</span>
+            </label>
+            <select
+              [value]="occasionValue()"
+              (change)="onOccasionChange($event)"
+              class="select select-bordered w-full"
+            >
+              <option value="all">Todas</option>
+              <option value="amor">Amor</option>
+              <option value="cumpleaños">Cumpleaños</option>
+              <option value="nacimiento">Nacimiento</option>
+              <option value="agradecimiento">Agradecimiento</option>
+              <option value="pésame">Pésame</option>
+              <option value="celebración">Celebración</option>
+            </select>
+          </div>
+        </div>
+
+        @if (activeFiltersCount() > 0) {
+          <button (click)="onClearFilters()" class="btn btn-ghost btn-sm w-full">
+            ✕ Limpiar filtros
+          </button>
+        }
+      </div>
+    </div>
+  </div>
+</form>

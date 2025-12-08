@@ -14,15 +14,13 @@ export class FlowersService {
   private flowersSignal = signal<Flower[]>([]);
   readonly flowers = this.flowersSignal.asReadonly();
 
-
   getAll(): Observable<Flower[]> {
     return this.http
       .get<Flower[]>(this.apiUrl)
-      .pipe(tap(flowers => this.flowersSignal.set(flowers)));
+      .pipe(tap((flowers) => this.flowersSignal.set(flowers)));
   }
 
   getOne(id: string) {
     return this.http.get<Flower>(`${this.apiUrl}/${id}`);
   }
-
 }

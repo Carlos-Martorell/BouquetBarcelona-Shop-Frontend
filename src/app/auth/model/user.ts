@@ -7,12 +7,10 @@ export interface User {
   address?: string;
 }
 
-
 export interface LoginResponse {
   access_token: string;
   user: User;
 }
-
 
 export interface RegisterData {
   name: string;

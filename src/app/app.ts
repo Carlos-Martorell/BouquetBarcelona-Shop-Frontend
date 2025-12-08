@@ -10,5 +10,5 @@ import { NotificationService } from './shared';
 })
 export class App {
   protected readonly title = signal('bouquet-shop');
-   notificationService = inject(NotificationService);
+  notificationService = inject(NotificationService);
 }

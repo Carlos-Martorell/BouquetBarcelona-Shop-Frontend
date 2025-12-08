@@ -1,47 +1,49 @@
-
-<article class="card bg-white shadow-lg hover:shadow-2xl transition-shadow duration-300 border border-border group">
-  
+<article
+  class="card bg-white shadow-lg hover:shadow-2xl transition-shadow duration-300 border border-border group"
+>
   <figure class="relative overflow-hidden aspect-square">
-    <img 
-      [src]="flower().images[0]" 
-      [alt]="flower().name"
-      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-    />
-    
+    <div class="carousel carousel-vertical rounded-box h-96">
+      @for (image of flower().images; track $index) {
+        <div class="carousel-item h-full">
+          <img
+            [src]="image"
+            [alt]="flower().name"
+            class="w-full h-full object-cover lg:group-hover:scale-102 transition-transform duration-500"
+          />
+        </div>
+      }
+    </div>
   </figure>
 
   <div class="card-body p-4">
-    
     <h3 class="card-title text-lg font-display text-primary line-clamp-2">
       {{ flower().name }}
     </h3>
-    
+
     <p class="text-text/70 text-sm line-clamp-2">
       {{ flower().description }}
     </p>
-    
+
     <div class="flex flex-wrap gap-2 mt-2">
       <span class="badge badge-sm bg-accent/20 text-accent border-0">
         {{ flower().category }}
       </span>
-    @for (color of flower().colors; track color) {
-      <span class="badge badge-sm bg-secondary/20 text-secondary border-0">
-        {{ color }}
-      </span>
-    }
+      @for (color of flower().colors; track color) {
+        <span class="badge badge-sm bg-secondary/20 text-secondary border-0">
+          {{ color }}
+        </span>
+      }
     </div>
-    
+
     <div class="card-actions justify-between items-center mt-4">
-      <span class="text-2xl font-bold text-primary">
-        {{ flower().price }}€
-      </span>
-      
-      <a 
+      <span class="text-2xl font-bold text-primary"> {{ flower().price }}€ </span>
+
+      <a
         [routerLink]="['/catalog', flower()._id]"
-        class="btn btn-primary btn-sm">
+        class="btn btn-primary hover:bg-secondary hover:border-secondary hover:text-primary"
+      >
         Ver detalles
       </a>
     </div>
-    
   </div>
 </article>

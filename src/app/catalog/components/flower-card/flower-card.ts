@@ -10,6 +10,5 @@ import { FlowersService } from '@app/catalog/services/flowers';
   styleUrl: './flower-card.css',
 })
 export class FlowerCard {
-
   flower = input.required<Flower>();
 }

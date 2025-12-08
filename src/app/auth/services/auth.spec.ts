@@ -1,4 +1,3 @@
-
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
@@ -12,17 +11,16 @@ describe('AuthService', () => {
   let routerSpy: jasmine.SpyObj<Router>;
   const apiUrl = `${environment.apiUrl}/api/auth`;
 
-
   const mockUser = {
     id: '123',
     name: 'Test User',
     email: 'test@test.com',
-    role: 'client' as const
+    role: 'client' as const,
   };
 
   const mockLoginResponse = {
     access_token: 'mock-jwt-token',
-    user: mockUser
+    user: mockUser,
   };
 
   beforeEach(() => {
@@ -32,8 +30,8 @@ describe('AuthService', () => {
         AuthService,
         provideHttpClient(),
         provideHttpClientTesting(),
-        { provide: Router, useValue: routerSpyObj }
-      ]
+        { provide: Router, useValue: routerSpyObj },
+      ],
     });
 
     service = TestBed.inject(AuthService);
@@ -58,7 +56,6 @@ describe('AuthService', () => {
     expect(service.token()).toBeNull();
   });
 
-
   it('should login user and store token', (done) => {
     service.login('test@test.com', '123456').subscribe({
       next: (response) => {
@@ -69,7 +66,7 @@ describe('AuthService', () => {
         expect(localStorage.getItem('token')).toBe('mock-jwt-token');
         expect(localStorage.getItem('user')).toBe(JSON.stringify(mockUser));
         done();
-      }
+      },
     });
 
     const req = httpMock.expectOne(`${apiUrl}/login`);
@@ -83,7 +80,7 @@ describe('AuthService', () => {
       name: 'Test User',
       email: 'test@test.com',
       password: '123456',
-      phone: '+34 666555444'
+      phone: '+34 666555444',
     };
 
     service.register(registerData).subscribe({
@@ -91,7 +88,7 @@ describe('AuthService', () => {
         expect(service.isLoggedIn()).toBe(true);
         expect(service.currentUser()).toEqual(mockUser);
         done();
-      }
+      },
     });
 
     const registerReq = httpMock.expectOne(`${apiUrl}/register`);
@@ -104,10 +101,7 @@ describe('AuthService', () => {
     loginReq.flush(mockLoginResponse);
   });
 
-
-
   it('should logout user and clear storage', (done) => {
-
     service.login('test@test.com', '123456').subscribe(() => {
       service.logout();
 
@@ -123,21 +117,19 @@ describe('AuthService', () => {
     httpMock.expectOne(`${apiUrl}/login`).flush(mockLoginResponse);
   });
 
-
   it('should load user from localStorage on init', () => {
-
     localStorage.setItem('token', 'stored-token');
     localStorage.setItem('user', JSON.stringify(mockUser));
 
-    TestBed.resetTestingModule(); 
-    
+    TestBed.resetTestingModule();
+
     TestBed.configureTestingModule({
-        providers: [
+      providers: [
         AuthService,
         provideHttpClient(),
-        provideHttpClientTesting(), 
-        { provide: Router, useValue: jasmine.createSpyObj('Router', ['navigate']) }
-        ]
+        provideHttpClientTesting(),
+        { provide: Router, useValue: jasmine.createSpyObj('Router', ['navigate']) },
+      ],
     });
 
     const newServiceInstance = TestBed.inject(AuthService);
@@ -146,8 +138,6 @@ describe('AuthService', () => {
     expect(newServiceInstance.currentUser()).toEqual(mockUser);
     expect(newServiceInstance.token()).toBe('stored-token');
   });
-
-
 
   it('should compute isLoggedIn correctly', (done) => {
     expect(service.isLoggedIn()).toBe(false);

@@ -5,4 +5,3 @@ export * from './components/product-grid/product-grid';
 export * from './components/search-bar/search-bar';
 export * from './pages/catalog-list/catalog-list';
 export * from './pages/product-detail/product-detail';
-

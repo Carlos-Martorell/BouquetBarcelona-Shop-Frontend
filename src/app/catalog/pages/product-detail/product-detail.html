@@ -1,6 +1,4 @@
-
-<div class="container mx-auto px-4 py-8">
-  
+<div class="container mx-auto px-4 py-8 max-w-6xl">
   @if (loading()) {
     <div class="flex justify-center py-20">
       <div class="loading loading-spinner loading-lg text-primary"></div>
@@ -10,23 +8,26 @@
   @if (flower()) {
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
       <div>
-        <figure class="aspect-square rounded-lg overflow-hidden border-2 border-border mb-4">
-          <img 
-            [src]="flower()!.images[selectedImage()]" 
+        <figure
+          class="aspect-square rounded-lg overflow-hidden border-2 border-border mb-4 bg-white"
+        >
+          <img
+            [src]="flower()!.images[selectedImage()]"
             [alt]="flower()!.name"
             class="w-full h-full object-cover"
           />
         </figure>
 
-        <div class="flex gap-2 overflow-x-auto">
+        <div class="flex gap-2 overflow-x-auto pb-2">
           @for (image of flower()!.images; track $index) {
             <button
               (click)="selectImage($index)"
               [class.ring-2]="selectedImage() === $index"
               [class.ring-primary]="selectedImage() === $index"
-              class="w-20 h-20 rounded-lg overflow-hidden border border-border flex-shrink-0">
-              <img 
-                [src]="image" 
+              class="w-20 h-20 rounded-lg overflow-hidden border border-border flex-shrink-0 hover:opacity-80 transition-opacity"
+            >
+              <img
+                [src]="image"
                 [alt]="'Imagen ' + ($index + 1)"
                 class="w-full h-full object-cover"
               />
@@ -36,14 +37,17 @@
       </div>
 
       <div class="flex flex-col">
-        
-        <h1 class="text-4xl font-display font-bold text-primary mb-4">
+        <div class="text-sm text-text/60 mb-4">
+          <a routerLink="/" class="hover:text-primary">Inicio</a>
+          <span class="mx-2">/</span>
+          <span>{{ flower()!.name }}</span>
+        </div>
+
+        <h1 class="text-4xl font-display font-bold text-primary mb-2">
           {{ flower()!.name }}
         </h1>
-        
-        <p class="text-3xl font-bold text-secondary mb-6">
-          {{ flower()!.price }}€
-        </p>
+
+        <p class="text-3xl font-bold text-secondary mb-6">{{ flower()!.price }}€</p>
 
         <p class="text-text mb-6 leading-relaxed">
           {{ flower()!.description }}
@@ -51,47 +55,87 @@
 
         <div class="flex flex-wrap gap-2 mb-6">
           <span class="badge badge-lg bg-accent/20 text-accent">
-            {{ flower()!.category }}
+            {{ flower()!.category | titlecase }}
           </span>
-          @for (color of flower()!.colors; track color) {
-            <span class="badge badge-lg bg-secondary/20 text-secondary">
-              {{ color }}
-            </span>
-          }
+          <span class="badge badge-lg bg-secondary/20 text-secondary">
+            {{ flower()!.occasion | titlecase }}
+          </span>
+          <span class="badge badge-lg bg-primary/20 text-primary">
+            {{ flower()!.size | titlecase }}
+          </span>
+        </div>
+
+        <div class="mb-6">
+          <h3 class="text-sm font-semibold text-text mb-2">Colores:</h3>
+          <div class="flex flex-wrap gap-2">
+            @for (color of flower()!.colors; track color) {
+              <span class="badge badge-lg bg-secondary/20 text-secondary">
+                {{ color }}
+              </span>
+            }
+          </div>
         </div>
 
         @if (flower()!.stock > 0) {
-          <p class="text-success mb-6">
-            ✓ Disponible
+          <p class="text-success mb-4 flex items-center gap-2">
+            <span class="text-xl">✓</span>
+            <span>Disponible</span>
           </p>
         } @else {
-          <p class="text-error mb-6">
-            ✗ Agotado
+          <p class="text-error mb-4 flex items-center gap-2">
+            <span class="text-xl">✗</span>
+            <span>Agotado</span>
           </p>
         }
 
-        <button 
+        <div class="divider"></div>
+
+        <div class="flex items-center gap-4 mb-6">
+          <span class="text-text font-medium">Cantidad:</span>
+          <div class="join">
+            <button (click)="decrementQuantity()" class="btn btn-sm join-item">−</button>
+            <div class="join-item flex items-center justify-center bg-base-200 px-6">
+              <span class="text-lg font-bold">{{ quantity() }}</span>
+            </div>
+            <button
+              (click)="incrementQuantity()"
+              [disabled]="quantity() >= flower()!.stock"
+              class="btn btn-sm join-item"
+            >
+              +
+            </button>
+          </div>
+        </div>
+
+        <button
           (click)="addToCart()"
           [disabled]="flower()!.stock === 0"
-          class="btn btn-primary btn-lg w-full mb-4">
-          🛒 Añadir al carrito
+          class="btn btn-primary btn-lg w-full mb-4 shadow-lg"
+        >
+          <span class="text-xl">🛒</span>
+          Añadir al carrito
+          @if (quantity() > 1) {
+            <span>({{ quantity() }} unidades)</span>
+          }
         </button>
 
+        <button (click)="goBack()" class="btn btn-ghost w-full border-primary/40">
+          ← Seguir comprando
+        </button>
+
+        <div class="divider"></div>
+
         @if (flower()!.careInstructions) {
-          <div class="collapse collapse-arrow bg-base-200 mt-4">
-            <input type="checkbox" /> 
-            <div class="collapse-title text-lg font-medium">
-              💧 Cuidados y conservación
-            </div>
-            <div class="collapse-content"> 
-              <p>{{ flower()!.careInstructions }}</p>
-            </div>
+          <div class="bg-success/10 rounded-lg p-6 border border-success/20">
+            <h3 class="text-lg font-bold text-success mb-3 flex items-center gap-2">
+              Cuidados y conservación
+            </h3>
+            <p class="text-text leading-relaxed">
+              {{ flower()!.careInstructions }}
+            </p>
           </div>
         }
-
       </div>
-
     </div>
   }
-
 </div>

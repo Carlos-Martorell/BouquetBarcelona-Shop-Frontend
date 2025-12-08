@@ -38,13 +38,13 @@ export class Login {
 
     this.authService.login(email!, password!).subscribe({
       next: () => {
-        this.notificationService.showSuccess('¡Bienvenido!'); 
-        this.router.navigate(['/']); 
+        this.notificationService.showSuccess('¡Bienvenido!');
+        this.router.navigate(['/']);
       },
-      error: err => {
-        const message = this.getErrorMessage(err)
+      error: (err) => {
+        const message = this.getErrorMessage(err);
         this.errorMessage.set(message);
-        this.notificationService.showError(message)
+        this.notificationService.showError(message);
         this.loading.set(false);
       },
       complete: () => {

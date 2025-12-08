@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {  Component, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { AbstractControl, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '@auth';
@@ -11,7 +11,6 @@ import { NotificationService } from '@shared';
   imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './register.html',
   styleUrl: './register.css',
-
 })
 export class Register {
   private fb = inject(FormBuilder);
@@ -24,15 +23,15 @@ export class Register {
 
   registerForm = this.fb.group(
     {
-      name: ['', [Validators.required, Validators.minLength(3)]], 
+      name: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required]],
-      phone: ['', Validators.minLength(9)], 
+      phone: ['', Validators.minLength(9)],
     },
     {
       validators: this.passwordMatchValidator,
-    }
+    },
   );
   private passwordMatchValidator(control: AbstractControl): { [key: string]: boolean } | null {
     const password = control.get('password');
@@ -63,12 +62,12 @@ export class Register {
       .subscribe({
         next: () => {
           this.notificationService.showSuccess('¡Cuenta creada! Bienvenido');
-          this.router.navigate(['/']); 
+          this.router.navigate(['/']);
         },
-        error: err => {
+        error: (err) => {
           const message = this.getErrorMessage(err);
           this.errorMessage.set(message);
-          this.notificationService.showError(message);  
+          this.notificationService.showError(message);
           this.loading.set(false);
         },
         complete: () => {

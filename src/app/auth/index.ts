@@ -5,5 +5,3 @@ export * from './services/auth-interceptor';
 export * from './model/user';
 export * from './pages/login/login';
 export * from './pages/register/register';
-
-

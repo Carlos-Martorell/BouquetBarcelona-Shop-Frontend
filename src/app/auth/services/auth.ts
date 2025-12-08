@@ -30,7 +30,7 @@ export class AuthService {
   login(email: string, password: string) {
     return this.http
       .post<LoginResponse>(`${this.apiUrl}/login`, { email, password })
-      .pipe(tap(response => this.setAuth(response.access_token, response.user)));
+      .pipe(tap((response) => this.setAuth(response.access_token, response.user)));
   }
 
   register(data: RegisterData) {
@@ -39,7 +39,7 @@ export class AuthService {
       .pipe(switchMap(() => this.login(data.email, data.password)));
   }
 
-    logout() {
+  logout() {
     this.clearAuth();
     this.router.navigate(['/']);
   }
@@ -48,7 +48,7 @@ export class AuthService {
     this.tokenSignal.set(token);
     this.currentUserSignal.set(user);
 
- if (isPlatformBrowser(this.platformId)) {
+    if (isPlatformBrowser(this.platformId)) {
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
     }
@@ -58,14 +58,14 @@ export class AuthService {
     this.tokenSignal.set(null);
     this.currentUserSignal.set(null);
 
-  if (isPlatformBrowser(this.platformId)) {
+    if (isPlatformBrowser(this.platformId)) {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
     }
   }
 
   private loadFromStorage() {
-      if (isPlatformBrowser(this.platformId)) {
+    if (isPlatformBrowser(this.platformId)) {
       const token = localStorage.getItem('token');
       const userJson = localStorage.getItem('user');
 
@@ -75,6 +75,4 @@ export class AuthService {
       }
     }
   }
-
-
 }
