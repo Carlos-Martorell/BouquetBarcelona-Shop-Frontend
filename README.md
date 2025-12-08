@@ -52,3 +52,12 @@ readonly token = this.tokenSignal.asReadonly();
 readonly isLoggedIn = computed(() => !!this.token());
 readonly isAdmin = computed(() => this.currentUser()?.role === 'admin');
 ```
+
+
+
+
+
+
+fix(cart): Guard localStorage access against SSR environments
+
+Addresses the "ReferenceError: localStorage is not defined" error encountered during server-side rendering (SSR) by ensuring all browser-specific operations, such as calling loadCart() and initializing the persistence effect, are gated using isPlatformBrowser.

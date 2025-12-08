@@ -1,6 +1,7 @@
-import { computed, effect, Injectable, signal } from '@angular/core';
+import { computed, effect, inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
 import { Flower } from '@catalog';
 import { CartItem } from '@cart';
+import { isPlatformBrowser } from '@angular/common';
 
 
 @Injectable({
@@ -11,22 +12,23 @@ export class CartService {
   private cartItemsSignal = signal<CartItem[]>([]);
   readonly cartItems = this.cartItemsSignal.asReadonly()
 
+  private platformId = inject(PLATFORM_ID);
 
-  readonly totalItemsCount = computed(() => {
-      let totalCount = 0
-      this.cartItems().reduce((acc, item) => acc  + item.quantity, 0)
-    })
+  readonly totalItemsCount = computed(() => this.cartItems().reduce((acc, item) => acc  + item.quantity, 0))
 
   readonly cartTotal = computed(() => 
     this.cartItems().reduce((acc, item) => acc  + (item.flower.price * item.quantity), 0)
   )
 
   constructor(){
-    this.loadCart()
+    if (isPlatformBrowser(this.platformId)) {
+        
+        this.loadCart();
 
-    effect(() => {
-      localStorage.setItem('cart', JSON.stringify(this.cartItems()))
-    })
+        effect(() => {
+            localStorage.setItem('cart', JSON.stringify(this.cartItems()));
+        });
+    }
   }
 
   loadCart() {
@@ -59,7 +61,7 @@ export class CartService {
     this.cartItemsSignal.set(items)
   }
 
-  updateQuantity(id:string, quantity: number){
+  updateQuantity(id: string, quantity: number){
     const items = this.cartItems().map(item => 
       item.flower._id === id
       ? {...item, quantity}
