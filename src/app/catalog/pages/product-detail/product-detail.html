@@ -1,6 +1,6 @@
-<div class="container mx-auto px-4 py-8 max-w-6xl">
+<div class="container mx-auto px-4 py-8 max-w-6xl" role="region" aria-labelledby="product-name" aria-label="Detalle del producto">
   @if (loading()) {
-    <div class="flex justify-center py-20">
+    <div class="flex justify-center py-20" role="status" aria-live="polite" aria-atomic="true" aria-label="Cargando producto">
       <div class="loading loading-spinner loading-lg text-primary"></div>
     </div>
   }
@@ -10,21 +10,28 @@
       <div>
         <figure
           class="aspect-square rounded-lg overflow-hidden border-2 border-border mb-4 bg-white"
+          role="figure"
+          aria-labelledby="product-name"
+          aria-describedby="product-description"
+          aria-label="Galería principal del producto"
         >
           <img
             [src]="flower()!.images[selectedImage()]"
             [alt]="flower()!.name"
             class="w-full h-full object-cover"
+            role="img"
           />
         </figure>
 
-        <div class="flex gap-2 overflow-x-auto pb-2">
+        <div class="flex gap-2 overflow-x-auto pb-2" role="list" aria-label="Miniaturas de imágenes">
           @for (image of flower()!.images; track $index) {
             <button
               (click)="selectImage($index)"
               [class.ring-2]="selectedImage() === $index"
               [class.ring-primary]="selectedImage() === $index"
-              class="w-20 h-20 rounded-lg overflow-hidden border border-border flex-shrink-0 hover:opacity-80 transition-opacity"
+              class="w-20 h-20 rounded-lg overflow-hidden border border-border shrink-0 hover:opacity-80 transition-opacity"
+              aria-label="Seleccionar imagen del producto"
+              role="listitem"
             >
               <img
                 [src]="image"
@@ -40,36 +47,30 @@
         <div class="text-sm text-text/60 mb-4">
           <a routerLink="/" class="hover:text-primary">Inicio</a>
           <span class="mx-2">/</span>
-          <span>{{ flower()!.name }}</span>
+          <span id="product-name">{{ flower()!.name }}</span>
         </div>
 
-        <h1 class="text-4xl font-display font-bold text-primary mb-2">
+        <h1 id="product-name" class="text-4xl font-display font-bold text-primary mb-2" aria-hidden="true">
           {{ flower()!.name }}
         </h1>
 
-        <p class="text-3xl font-bold text-secondary mb-6">{{ flower()!.price }}€</p>
+        <p id="product-price" class="text-3xl font-bold text-secondary mb-6" role="text" aria-label="Precio del producto">{{ flower()!.price }}€</p>
 
-        <p class="text-text mb-6 leading-relaxed">
+        <p id="product-description" class="text-text mb-6 leading-relaxed" role="region" aria-label="Descripción del producto">
           {{ flower()!.description }}
         </p>
 
-        <div class="flex flex-wrap gap-2 mb-6">
-          <span class="badge badge-lg bg-accent/20 text-accent">
-            {{ flower()!.category | titlecase }}
-          </span>
-          <span class="badge badge-lg bg-secondary/20 text-secondary">
-            {{ flower()!.occasion | titlecase }}
-          </span>
-          <span class="badge badge-lg bg-primary/20 text-primary">
-            {{ flower()!.size | titlecase }}
-          </span>
+        <div class="flex flex-wrap gap-2 mb-6" role="list" aria-label="Etiquetas del producto">
+          <span class="badge badge-lg bg-accent/20 text-accent" role="listitem">{{ flower()!.category | titlecase }}</span>
+          <span class="badge badge-lg bg-secondary/20 text-secondary" role="listitem">{{ flower()!.occasion | titlecase }}</span>
+          <span class="badge badge-lg bg-primary/20 text-primary" role="listitem">{{ flower()!.size | titlecase }}</span>
         </div>
 
         <div class="mb-6">
           <h3 class="text-sm font-semibold text-text mb-2">Colores:</h3>
-          <div class="flex flex-wrap gap-2">
+          <div class="flex flex-wrap gap-2" role="list" aria-label="Colores disponibles">
             @for (color of flower()!.colors; track color) {
-              <span class="badge badge-lg bg-secondary/20 text-secondary">
+              <span class="badge badge-lg bg-secondary/20 text-secondary" role="listitem">
                 {{ color }}
               </span>
             }
@@ -77,12 +78,12 @@
         </div>
 
         @if (flower()!.stock > 0) {
-          <p class="text-success mb-4 flex items-center gap-2">
+          <p class="text-success mb-4 flex items-center gap-2" role="status" aria-live="polite" aria-atomic="true" aria-label="Estado de stock">
             <span class="text-xl">✓</span>
             <span>Disponible</span>
           </p>
         } @else {
-          <p class="text-error mb-4 flex items-center gap-2">
+          <p class="text-error mb-4 flex items-center gap-2" role="status" aria-live="polite" aria-atomic="true" aria-label="Estado de stock">
             <span class="text-xl">✗</span>
             <span>Agotado</span>
           </p>
@@ -90,17 +91,18 @@
 
         <div class="divider"></div>
 
-        <div class="flex items-center gap-4 mb-6">
+        <div class="flex items-center gap-4 mb-6" role="group" aria-label="Controles de cantidad">
           <span class="text-text font-medium">Cantidad:</span>
-          <div class="join">
-            <button (click)="decrementQuantity()" class="btn btn-sm join-item">−</button>
-            <div class="join-item flex items-center justify-center bg-base-200 px-6">
-              <span class="text-lg font-bold">{{ quantity() }}</span>
+          <div class="join" role="toolbar" aria-label="Ajustar cantidad">
+            <button (click)="decrementQuantity()" class="btn btn-sm join-item" aria-label="Disminuir cantidad">−</button>
+            <div class="join-item flex items-center justify-center bg-base-200 px-6" aria-hidden="true">
+              <span id="product-quantity" class="text-lg font-bold" aria-live="polite" aria-atomic="true">{{ quantity() }}</span>
             </div>
             <button
               (click)="incrementQuantity()"
               [disabled]="quantity() >= flower()!.stock"
               class="btn btn-sm join-item"
+              aria-label="Aumentar cantidad"
             >
               +
             </button>
@@ -111,6 +113,8 @@
           (click)="addToCart()"
           [disabled]="flower()!.stock === 0"
           class="btn btn-primary btn-lg w-full mb-4 shadow-lg"
+          aria-label="Añadir al carrito"
+          aria-describedby="product-price product-quantity"
         >
           <span class="text-xl">🛒</span>
           Añadir al carrito
@@ -119,14 +123,14 @@
           }
         </button>
 
-        <button (click)="goBack()" class="btn btn-ghost w-full border-primary/40">
+        <button (click)="goBack()" class="btn btn-ghost w-full border-primary/40" aria-label="Seguir comprando">
           ← Seguir comprando
         </button>
 
         <div class="divider"></div>
 
         @if (flower()!.careInstructions) {
-          <div class="bg-success/10 rounded-lg p-6 border border-success/20">
+          <div class="bg-success/10 rounded-lg p-6 border border-success/20" role="region" aria-label="Cuidados y conservación">
             <h3 class="text-lg font-bold text-success mb-3 flex items-center gap-2">
               Cuidados y conservación
             </h3>

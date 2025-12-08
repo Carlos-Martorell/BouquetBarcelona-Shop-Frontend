@@ -1,36 +1,49 @@
-<form role="search">
+<form role="search" aria-labelledby="search-collapse-title" aria-label="Formulario de búsqueda y filtros">
   <div class="collapse collapse-arrow bg-neutral/20 shadow-md rounded-lg border border-border">
-    <input type="checkbox" [checked]="isOpen()" (change)="toggleOpen()" />
+    <input
+      type="checkbox"
+      [checked]="isOpen()"
+      (change)="toggleOpen()"
+      aria-controls="search-collapse-content"
+      [attr.aria-expanded]="isOpen()"
+      aria-label="Alternar búsqueda y filtros"
+    />
 
-    <div class="collapse-title text-lg font-medium flex items-center gap-2">
+    <div id="search-collapse-title" class="collapse-title text-lg font-medium flex items-center gap-2" role="heading" aria-level="2">
       🔍 Buscar y filtrar
-      <span class="badge badge-sm badge-accent text-text"> {{ activeFiltersCount() }} filtros activos </span>
+      <span class="badge badge-sm badge-accent text-text" role="status" aria-live="polite"> {{ activeFiltersCount() }} filtros activos </span>
     </div>
 
-    <div class="collapse-content">
+    <div id="search-collapse-content" class="collapse-content" [attr.aria-hidden]="!isOpen()">
       <div class="space-y-4 pt-2">
         <div>
-          <label class="label">
+          <label class="label" for="search-input">
             <span class="label-text font-medium">Buscar</span>
           </label>
           <input
+            id="search-input"
             type="search"
             [value]="searchValue()"
             (input)="onSearchInput($event)"
             placeholder="Nombre o descripción..."
             class="input input-bordered w-full"
+            aria-label="Buscar productos por nombre o descripción"
+            aria-describedby="search-help"
           />
+          <p id="search-help" class="sr-only">Busca productos por nombre o descripción.</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label class="label">
+            <label class="label" for="category-select">
               <span class="label-text font-medium">Categoría</span>
             </label>
             <select
+              id="category-select"
               [value]="categoryValue()"
               (change)="onCategoryChange($event)"
               class="select select-bordered w-full"
+              aria-label="Filtrar por categoría"
             >
               <option value="all">Todas</option>
               <option value="romántico">Romántico</option>
@@ -42,13 +55,15 @@
           </div>
 
           <div>
-            <label class="label">
+            <label class="label" for="occasion-select">
               <span class="label-text font-medium">Ocasión</span>
             </label>
             <select
+              id="occasion-select"
               [value]="occasionValue()"
               (change)="onOccasionChange($event)"
               class="select select-bordered w-full"
+              aria-label="Filtrar por ocasión"
             >
               <option value="all">Todas</option>
               <option value="amor">Amor</option>
@@ -62,7 +77,7 @@
         </div>
 
         @if (activeFiltersCount() > 0) {
-          <button (click)="onClearFilters()" class="btn btn-ghost btn-sm w-full">
+          <button (click)="onClearFilters()" class="btn btn-ghost btn-sm w-full" aria-label="Limpiar filtros activos">
             ✕ Limpiar filtros
           </button>
         }

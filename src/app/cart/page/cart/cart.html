@@ -1,19 +1,18 @@
-
-<div class="container mx-auto px-4 py-8 max-w-4xl">
+<main role="main" class="container mx-auto px-4 py-8 max-w-4xl" aria-labelledby="cart-heading">
   
 
   <header class="mb-8">
-    <h1 class="text-4xl font-display font-bold text-primary mb-2">
+    <h1 id="cart-heading" class="text-4xl font-display font-bold text-primary mb-2">
       Cesta
     </h1>
   </header>
 
 
   @if (cartService.cartItems().length === 0) {
-    <div class="text-center py-20">
-      <span class="text-6xl mb-4 block">🛒</span>
+    <div class="text-center py-20" role="status" aria-live="polite" aria-atomic="true">
+      <span class="text-6xl mb-4 block" aria-hidden="true">🛒</span>
       <p class="text-2xl text-text/50 mb-6">Tu cesta está vacía</p>
-      <button (click)="goBack()" class="btn btn-primary">
+      <button type="button" (click)="goBack()" class="btn btn-primary" aria-label="Ver productos">
         Ver productos
       </button>
     </div>
@@ -21,40 +20,43 @@
 
 
   @if (cartService.cartItems().length > 0) {
-    <div class="space-y-4 mb-8">
+    <ul role="list" aria-label="Lista de artículos en la cesta" class="space-y-4 mb-8">
       @for (item of cartService.cartItems(); track item.flower._id) {
-        <app-cart-item 
-          [item]="item"
-          (quantityChange)="onQuantityChange($event)"
-          (remove)="onRemoveItem($event)"
-        />
+        <li role="listitem" class="w-full" aria-live="off">
+          <app-cart-item 
+            [item]="item"
+            (quantityChange)="onQuantityChange($event)"
+            (remove)="onRemoveItem($event)"
+          />
+        </li>
       }
-    </div>
+    </ul>
 
-    <div class="bg-base-200 rounded-lg p-6 border border-border">
+    <div class="bg-base-200 rounded-lg p-6 border border-border" role="region" aria-labelledby="order-summary-heading">
         <div class="flex justify-between text-text">
           <span>Envío gratuito gracias a nuestro servicio de entrega 100% ecológico.</span>
         </div>
       <div class="divider"></div>
 
-      <div class="flex justify-between text-xl font-bold text-primary mb-6">
+      <div id="order-summary-heading" class="flex justify-between text-xl font-bold text-primary mb-6" role="status" aria-live="polite" aria-atomic="true">
         <span>TOTAL:</span>
-        <span>{{ cartService.cartTotal() | currency:'EUR' }}</span>
+        <span id="total-amount">{{ cartService.cartTotal() | currency:'EUR' }}</span>
       </div>
 
       <div class="flex gap-4">
-        <button (click)="goBack()" class="btn btn-ghost flex-1">
+
+        <button type="button" (click)="goBack()" class="btn btn-ghost flex-1" aria-label="Seguir comprando">
           ← Seguir comprando
         </button>
-        <button (click)="onCheckout()" class="btn btn-primary bg-success border-success flex-1">
+        <button type="button" (click)="onCheckout()" class="btn btn-primary bg-success border-success flex-1" aria-label="Finalizar compra" aria-describedby="total-amount">
           Finalizar compra →
         </button>
       </div>
 
-      <button (click)="onClearCart()" class="btn btn-ghost btn-sm w-full mt-4 text-error">
+      <button type="button" (click)="onClearCart()" class="btn btn-ghost btn-sm w-full mt-4 text-error" aria-label="Vaciar carrito">
         Vaciar carrito
       </button>
     </div>
   }
 
-</div>
+</main>

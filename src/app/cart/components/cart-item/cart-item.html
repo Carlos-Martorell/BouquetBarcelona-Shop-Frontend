@@ -1,32 +1,35 @@
-
-<div class="flex items-center gap-4 p-4 bg-white rounded-lg border border-border shadow-sm">
-  
+<div class="flex items-center gap-4 p-4 bg-white rounded-lg border border-border shadow-sm"
+     role="group">
   <img 
     [src]="item().flower.images[0]" 
     [alt]="item().flower.name"
     class="w-24 h-24 object-cover rounded-lg"
+    role="img"
+    aria-hidden="false"
   />
 
   <div class="flex-1">
-    <h3 class="font-bold text-lg text-primary">{{ item().flower.name }}</h3>
-    <p class="text-text/70 text-sm">{{ item().flower.price | currency:'EUR' }} × {{ item().quantity }}</p>
+    <h3 id="cart-item-name-{{ item().flower._id }}" class="font-bold text-lg text-primary">{{ item().flower.name }}</h3>
+    <p class="text-text/70 text-sm" id="cart-item-price-{{ item().flower._id }}">
+      {{ item().flower.price | currency:'EUR' }} × <span id="cart-item-qty-{{ item().flower._id }}" aria-live="polite" aria-atomic="true">{{ item().quantity }}</span>
+    </p>
   </div>
 
   <div class="flex items-center gap-2">
 
-    <div class="join">
-      <button (click)="decrement()" class="btn btn-sm join-item">−</button>
-      <div class="join-item flex items-center justify-center bg-base-200 px-4">
+    <div class="join" role="group" aria-label="Controles de cantidad para {{ item().flower.name }}">
+      <button (click)="decrement()" class="btn btn-sm join-item" aria-label="Disminuir cantidad">−</button>
+      <div class="join-item flex items-center justify-center bg-base-200 px-4" aria-hidden="true">
         <span class="font-bold">{{ item().quantity }}</span>
       </div>
-      <button (click)="increment()" class="btn btn-sm join-item">+</button>
+      <button (click)="increment()" class="btn btn-sm join-item" aria-label="Aumentar cantidad de {{ item().flower.name }}" >+</button>
     </div>
 
-    <span class="text-lg font-bold text-primary min-w-[80px] text-right">
+    <span id="cart-item-total-{{ item().flower._id }}" class="text-lg font-bold text-primary min-w-[80px] text-right" aria-live="polite" aria-atomic="true">
       {{ item().flower.price * item().quantity | currency:'EUR' }}
     </span>
 
-    <button (click)="onRemove()" class="btn btn-ghost btn-sm text-error">
+    <button (click)="onRemove()" class="btn btn-ghost btn-sm text-error" aria-label="Eliminar de la cesta" >
       🗑️
     </button>
   </div>

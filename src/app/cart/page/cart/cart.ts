@@ -1,13 +1,11 @@
 import { Component, inject } from '@angular/core';
-import { CartService } from '@app/cart/services/cart';
-import { CartItemComponent } from "@app/cart/components/cart-item/cart-item";
-import { CartSummaryComponent } from "@app/cart/components/cart-summary/cart-summary";
+import { CartService, CartItemComponent } from '@cart';
 import { Router } from '@angular/router';
 import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-cart',
-  imports: [CartItemComponent, CartSummaryComponent, CurrencyPipe],
+  imports: [CartItemComponent, CurrencyPipe],
   templateUrl: './cart.html',
   styleUrl: './cart.css',
 })
