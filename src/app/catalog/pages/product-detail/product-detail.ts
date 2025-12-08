@@ -58,7 +58,7 @@ export class ProductDetail {
   addToCart() {
     const flower = this.flower();
     if (!flower) return;
-    // this.cartService.addToCart(flower, this.quantity());
+    this.cartService.addToCart(flower, this.quantity());
     this.notificationService.showSuccess(`${flower.name} añadido al carrito`);
     this.quantity.set(1);
   }

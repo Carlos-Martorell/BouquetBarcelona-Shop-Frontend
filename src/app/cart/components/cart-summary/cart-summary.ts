@@ -7,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrl: './cart-summary.css',
 })
 export class CartSummaryComponent {
-
+  onCheckout(){
+    
+  }
 }

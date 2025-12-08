@@ -1,1 +1,34 @@
-<p>cart-item works!</p>
+
+<div class="flex items-center gap-4 p-4 bg-white rounded-lg border border-border shadow-sm">
+  
+  <img 
+    [src]="item().flower.images[0]" 
+    [alt]="item().flower.name"
+    class="w-24 h-24 object-cover rounded-lg"
+  />
+
+  <div class="flex-1">
+    <h3 class="font-bold text-lg text-primary">{{ item().flower.name }}</h3>
+    <p class="text-text/70 text-sm">{{ item().flower.price | currency:'EUR' }} × {{ item().quantity }}</p>
+  </div>
+
+  <div class="flex items-center gap-2">
+
+    <div class="join">
+      <button (click)="decrement()" class="btn btn-sm join-item">−</button>
+      <div class="join-item flex items-center justify-center bg-base-200 px-4">
+        <span class="font-bold">{{ item().quantity }}</span>
+      </div>
+      <button (click)="increment()" class="btn btn-sm join-item">+</button>
+    </div>
+
+    <span class="text-lg font-bold text-primary min-w-[80px] text-right">
+      {{ item().flower.price * item().quantity | currency:'EUR' }}
+    </span>
+
+    <button (click)="onRemove()" class="btn btn-ghost btn-sm text-error">
+      🗑️
+    </button>
+  </div>
+
+</div>

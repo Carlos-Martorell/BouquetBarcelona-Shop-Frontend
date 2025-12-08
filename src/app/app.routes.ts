@@ -19,6 +19,10 @@ export const routes: Routes = [
           import('./catalog/pages/product-detail/product-detail').then((m) => m.ProductDetail),
         title: 'Detalle del Producto',
       },
+    {
+            path: '**',
+            redirectTo: 'catalog',
+    },
     ],
   },
   {
