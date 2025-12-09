@@ -1,6 +1,6 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { CartService } from '@app/cart';
+import { CartService } from '@cart';
 import { NotificationService } from '@shared';
 import { CreateOrder, OrderItem, OrdersService } from '@core';
 import { CheckoutData } from '@checkout';
