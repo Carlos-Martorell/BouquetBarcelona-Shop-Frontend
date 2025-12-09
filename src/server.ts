@@ -12,6 +12,12 @@ const browserDistFolder = join(import.meta.dirname, '../browser');
 const app = express();
 const angularApp = new AngularNodeAppEngine();
 
+export function getPrerenderParams(): Promise<Array<{ id: string }>> {
+  // El nombre de la propiedad 'id' debe coincidir con el parámetro de la ruta ':id'.
+  // Al devolver un array vacío, se satisface la dependencia sin generar contenido estático.
+  return Promise.resolve([]);
+}
+
 /**
  * Example Express Rest API endpoints can be defined here.
  * Uncomment and define endpoints as necessary.
