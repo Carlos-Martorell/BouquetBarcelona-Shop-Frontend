@@ -2,7 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Flower, FlowersService } from '@catalog';
 import { CartService } from '@cart';
-import { NotificationService } from '@app/shared';
+import { NotificationService } from '@shared';
 import { TitleCasePipe } from '@angular/common';
 
 @Component({
@@ -59,7 +59,7 @@ export class ProductDetail {
     const flower = this.flower();
     if (!flower) return;
     this.cartService.addToCart(flower, this.quantity());
-    this.notificationService.showSuccess(`${flower.name} añadido al carrito`);
+    // this.notificationService.showSuccess(`${flower.name} añadido al carrito`);
     this.quantity.set(1);
   }
 

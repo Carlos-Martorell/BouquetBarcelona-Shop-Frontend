@@ -1,1 +1,191 @@
-<p>delivery-form works!</p>
+<!-- checkout/components/delivery-form/delivery-form.html -->
+<form [formGroup]="deliveryForm" (ngSubmit)="onSubmit()">
+  
+  <div class="bg-white rounded-lg shadow-lg p-6 space-y-6">
+    
+    <section>
+      <h2 class="text-2xl font-bold text-primary mb-4">Datos de contacto</h2>
+      
+      <div class="mb-4">
+        <label for="name" class="label">
+          <span class="label-text font-semibold">Nombre completo *</span>
+        </label>
+        <input 
+          id="name"
+          type="text"
+          formControlName="customerName"
+          placeholder="Ej: María García"
+          class="input input-bordered w-full"
+          [class.input-error]="hasError('customerName')"
+          aria-required="true"
+        />
+        @if (hasError('customerName')) {
+          <p class="text-error text-sm mt-1">{{ getError('customerName') }}</p>
+        }
+      </div>
+
+      <div class="mb-4">
+        <label for="email" class="label">
+          <span class="label-text font-semibold">Email *</span>
+        </label>
+        <input 
+          id="email"
+          type="email"
+          formControlName="customerEmail"
+          placeholder="tu@email.com"
+          class="input input-bordered w-full"
+          [class.input-error]="hasError('customerEmail')"
+          aria-required="true"
+        />
+        @if (hasError('customerEmail')) {
+          <p class="text-error text-sm mt-1">{{ getError('customerEmail') }}</p>
+        }
+      </div>
+
+      <div class="mb-4">
+        <label for="phone" class="label">
+          <span class="label-text font-semibold">Teléfono *</span>
+        </label>
+        <input 
+          id="phone"
+          type="tel"
+          formControlName="customerPhone"
+          placeholder="612345678"
+          class="input input-bordered w-full"
+          [class.input-error]="hasError('customerPhone')"
+          aria-required="true"
+        />
+        @if (hasError('customerPhone')) {
+          <p class="text-error text-sm mt-1">{{ getError('customerPhone') }}</p>
+        }
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section>
+      <h2 class="text-2xl font-bold text-primary mb-4">Dirección de entrega</h2>
+      
+      <div class="mb-4 relative">
+        <label for="address" class="label">
+          <span class="label-text font-semibold">Dirección *</span>
+        </label>
+        <input 
+          id="address"
+          type="text"
+          formControlName="deliveryAddress"
+          (input)="onAddressInput($event)"
+          placeholder="Escribe tu dirección..."
+          class="input input-bordered w-full"
+          [class.input-error]="hasError('deliveryAddress')"
+          aria-required="true"
+          autocomplete="off"
+        />
+        
+        @if (addressSuggestions().length > 0) {
+          <ul 
+            class="absolute z-10 w-full bg-white border border-border rounded-lg shadow-lg mt-1 max-h-60 overflow-auto"
+            role="listbox">
+            @for (suggestion of addressSuggestions(); track suggestion.id) {
+              <li 
+                (click)="selectAddress(suggestion)"
+                class="px-4 py-2 hover:bg-primary/10 cursor-pointer"
+                role="option">
+                {{ suggestion.place_name }}
+              </li>
+            }
+          </ul>
+        }
+        
+        @if (hasError('deliveryAddress')) {
+          <p class="text-error text-sm mt-1">{{ getError('deliveryAddress') }}</p>
+        }
+      </div>
+
+      <div class="mb-4">
+        <label for="details" class="label">
+          <span class="label-text font-semibold">Detalles adicionales (opcional)</span>
+        </label>
+        <input 
+          id="details"
+          type="text"
+          formControlName="deliveryDetails"
+          placeholder="Piso, puerta, timbre..."
+          class="input input-bordered w-full"
+        />
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section>
+      <h2 class="text-2xl font-bold text-primary mb-4">Fecha y hora de entrega</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+        <div>
+          <label for="date" class="label">
+            <span class="label-text font-semibold">Fecha *</span>
+          </label>
+          <input 
+            id="date"
+            type="date"
+            formControlName="deliveryDate"
+            [min]="minDate"
+            class="input input-bordered w-full"
+            [class.input-error]="hasError('deliveryDate')"
+            aria-required="true"
+          />
+          @if (hasError('deliveryDate')) {
+            <p class="text-error text-sm mt-1">{{ getError('deliveryDate') }}</p>
+          }
+        </div>
+
+        <div>
+          <label for="time" class="label">
+            <span class="label-text font-semibold">Franja horaria *</span>
+          </label>
+          <select 
+            id="time"
+            formControlName="deliveryTime"
+            class="select select-bordered w-full"
+            [class.select-error]="hasError('deliveryTime')"
+            aria-required="true">
+            <option value="" disabled>Selecciona una franja</option>
+            @for (slot of timeSlots; track slot.value) {
+              <option [value]="slot.value">{{ slot.label }}</option>
+            }
+          </select>
+          @if (hasError('deliveryTime')) {
+            <p class="text-error text-sm mt-1">{{ getError('deliveryTime') }}</p>
+          }
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section>
+      <h2 class="text-2xl font-bold text-primary mb-4">Notas especiales (opcional)</h2>
+      
+      <textarea 
+        formControlName="notes"
+        rows="3"
+        placeholder="Dedicatoria, instrucciones especiales..."
+        class="textarea textarea-bordered w-full"
+      ></textarea>
+      <p class="text-sm text-text/60 mt-1">
+        💡 Puedes añadir una dedicatoria o instrucciones especiales
+      </p>
+    </section>
+
+    <button 
+      type="submit"
+      [disabled]="deliveryForm.invalid"
+      class="btn btn-primary btn-lg w-full"
+      aria-label="Confirmar pedido">
+      Confirmar pedido →
+    </button>
+
+  </div>
+</form>

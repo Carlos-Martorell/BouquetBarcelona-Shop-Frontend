@@ -14,12 +14,9 @@ export class CheckoutService {
   private cartService = inject(CartService)
   private ordersService = inject(OrdersService)
   private notificationService = inject(NotificationService)
-  
-  isProcessing = signal(false);
 
   cartItems = this.cartService.cartItems()
   cartTotal = this.cartService.cartTotal()
-
   clearCart = this.cartService.clearCart()
 
   createOrder(checkoutData: CheckoutData) {

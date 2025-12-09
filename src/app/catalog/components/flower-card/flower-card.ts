@@ -1,7 +1,7 @@
 import { Component, computed, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Flower } from '@app/catalog/models/flower';
-import { FlowersService } from '@app/catalog/services/flowers';
+import { Flower } from '@catalog';
+
 
 @Component({
   selector: 'app-flower-card',

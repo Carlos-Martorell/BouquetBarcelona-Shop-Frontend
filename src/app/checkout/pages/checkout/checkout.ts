@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, computed, effect, inject, signal } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NotificationService } from '@shared';
-import { CheckoutData, CheckoutService } from '@checkout';
+import { CheckoutData, CheckoutService, DeliveryForm, OrderSummary } from '@checkout';
 import { AddressSuggestion, GeocodingService, OrdersService } from '@core';
 import { Router } from '@angular/router';
 import { AuthService } from '@auth';
@@ -10,7 +10,7 @@ import { CartService } from '@cart';
 
 @Component({
   selector: 'app-checkout',
-  imports: [],
+  imports: [DeliveryForm, OrderSummary ],
   templateUrl: './checkout.html',
   styleUrl: './checkout.css',
 })
