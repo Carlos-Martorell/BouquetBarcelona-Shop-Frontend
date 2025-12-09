@@ -33,12 +33,8 @@
             "styles": [
               "src/styles.css"
             ],
-            "server": "src/main.server.ts",
-            "outputMode": "server",
-            "prerender": false,
-            "ssr": {
-                "entry": "src/server.ts"
-            }
+            "outputMode": "static",
+            "prerender": false
           },
           "configurations": {
             "production": {
