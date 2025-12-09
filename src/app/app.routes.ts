@@ -18,6 +18,7 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./catalog/pages/product-detail/product-detail').then((m) => m.ProductDetail),
         title: 'Detalle del Producto',
+        data: { prerender: false },
       },
       {
         path: 'cart',
