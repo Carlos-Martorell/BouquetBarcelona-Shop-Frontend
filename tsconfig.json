@@ -34,6 +34,12 @@
       "@cart": [
         "./src/app/cart/index.ts" 
       ],
+      "@core": [
+        "./src/app/core/index.ts" 
+      ],
+      "@checkout": [
+        "./src/app/checkout/index.ts" 
+      ],
     }
   },
   "angularCompilerOptions": {
