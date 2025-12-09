@@ -39,13 +39,13 @@
     </div>
 
     <div class="card-actions justify-between items-center mt-4">
-      <span class="text-2xl font-bold text-primary" role="text" aria-label="Precio">
+      <span class="text-2xl font-bold text-accent" role="text" aria-label="Precio">
         {{ flower().price }}€
       </span>
 
       <a
         [routerLink]="['/catalog', flower()._id]"
-        class="btn btn-primary hover:bg-secondary hover:border-secondary hover:text-primary"
+        class="btn btn-accent hover:bg-success hover:border-success hover:text-background"
         aria-label="Ver detalles del producto"
       >
         Ver detalles
