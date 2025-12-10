@@ -131,7 +131,7 @@
               <!-- 🛒🧺  -->
               💐</span
             >
-            <span class="badge badge-sm badge-success indicator-item">{{totalItemsCount()}}</span>
+            <span class="badge badge-sm badge-success indicator-item">{{ totalItemsCount() }}</span>
           </div>
         </button>
 
@@ -140,10 +140,15 @@
           class="mt-6 z-1 card card-compact dropdown-content w-64 bg-white shadow-xl border border-border"
         >
           <div class="card-body">
-            <span class="font-bold text-lg text-text">{{totalItemsCount()}} productos</span>
-            <span class="text-secondary">Total: {{cartTotal() | currency:'EUR'}} </span>
+            <span class="font-bold text-lg text-text">{{ totalItemsCount() }} productos</span>
+            <span class="text-secondary">Total: {{ cartTotal() | currency: 'EUR' }} </span>
             <div class="card-actions mt-2">
-              <a routerLink="/cart" class="btn btn-secondary bg-accent hover:bg-success hover:border-success hover:text-background btn-block"> Ver carrito </a>
+              <a
+                routerLink="/cart"
+                class="btn btn-secondary bg-accent hover:bg-success hover:border-success hover:text-background btn-block"
+              >
+                Ver carrito
+              </a>
             </div>
           </div>
         </div>

@@ -10,9 +10,7 @@ import { CurrencyPipe } from '@angular/common';
   styleUrl: './cart.css',
 })
 export class Cart {
-
-
-  onQuantityChange(data: { flowerId: string, quantity: number }) {
+  onQuantityChange(data: { flowerId: string; quantity: number }) {
     this.cartService.updateQuantity(data.flowerId, data.quantity);
   }
 
@@ -20,7 +18,7 @@ export class Cart {
     this.cartService.removeFromCart(flowerId);
   }
 
-  cartService = inject(CartService)
+  cartService = inject(CartService);
   router = inject(Router);
 
   onClearCart() {
@@ -33,8 +31,7 @@ export class Cart {
     this.router.navigate(['/checkout']);
   }
 
-
   goBack() {
-    this.router.navigate(['/'])
+    this.router.navigate(['/']);
   }
 }

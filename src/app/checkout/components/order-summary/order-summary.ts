@@ -9,5 +9,5 @@ import { CartService } from '@cart';
   styleUrl: './order-summary.css',
 })
 export class OrderSummary {
-cartService = inject(CartService);
+  cartService = inject(CartService);
 }

@@ -1,4 +1,4 @@
-import { Flower } from "@catalog";
+import { Flower } from '@catalog';
 
 export interface CartItem {
   flower: Flower;

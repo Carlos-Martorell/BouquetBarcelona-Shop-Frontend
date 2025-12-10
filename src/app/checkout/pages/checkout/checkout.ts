@@ -6,10 +6,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@auth';
 import { CartService } from '@cart';
 
-
 @Component({
   selector: 'app-checkout',
-  imports: [DeliveryForm, OrderSummary ],
+  imports: [DeliveryForm, OrderSummary],
   templateUrl: './checkout.html',
   styleUrl: './checkout.css',
 })
@@ -22,33 +21,32 @@ export class Checkout {
   private geocodingService = inject(GeocodingService);
   private notificationService = inject(NotificationService);
 
-
   addressSuggestions = signal<AddressSuggestion[]>([]);
   isProcessing = signal(false);
 
-  isLoggedIn = computed(() => this.authService.isLoggedIn())
+  isLoggedIn = computed(() => this.authService.isLoggedIn());
   initialData = computed(() => {
-    const user = this.authService.currentUser()
-    if(!user) return undefined;
+    const user = this.authService.currentUser();
+    if (!user) return undefined;
 
     return {
       customerName: user.name || '',
       customerEmail: user.email || '',
-      customerPhone: user.phone || ''
-    }
-  })
+      customerPhone: user.phone || '',
+    };
+  });
 
-    ngOnInit() {
+  ngOnInit() {
     if (this.cartService.cartItems().length === 0) {
       this.notificationService.showError('Tu carrito está vacío');
-      this.router.navigate(['/cart'])
-      return;;
+      this.router.navigate(['/cart']);
+      return;
     }
-    this.isProcessing.set(false) 
-      const paymentStatus = this.route.snapshot.queryParams['payment'];
-  if (paymentStatus === 'cancelled') {
-    this.notificationService.showError('Pago cancelado. Puedes intentarlo de nuevo.');
-  }
+    this.isProcessing.set(false);
+    const paymentStatus = this.route.snapshot.queryParams['payment'];
+    if (paymentStatus === 'cancelled') {
+      this.notificationService.showError('Pago cancelado. Puedes intentarlo de nuevo.');
+    }
   }
 
   async onAddressSearch(query: string) {
@@ -57,28 +55,25 @@ export class Checkout {
   }
 
   onFormSubmit(data: CheckoutData) {
-  this.isProcessing.set(true);
+    this.isProcessing.set(true);
 
-  this.checkoutService.createOrder(data).subscribe({
-    next: async (order) => {
-      try {
-        await this.checkoutService.processPayment(order._id); 
-      } catch (error) {
+    this.checkoutService.createOrder(data).subscribe({
+      next: async (order) => {
+        try {
+          await this.checkoutService.processPayment(order._id);
+        } catch (error) {
+          this.isProcessing.set(false);
+          this.notificationService.showError('Error al procesar el pago');
+        }
+      },
+      error: () => {
         this.isProcessing.set(false);
-        this.notificationService.showError('Error al procesar el pago');
-      }
-    },
-    error: () => {
-      this.isProcessing.set(false);
-      this.notificationService.showError('Error al crear el pedido');
-    }
-  });
-  }   
+        this.notificationService.showError('Error al crear el pedido');
+      },
+    });
+  }
 
-
-    onLogin() {
+  onLogin() {
     this.checkoutService.redirectToLogin();
   }
 }
-
-

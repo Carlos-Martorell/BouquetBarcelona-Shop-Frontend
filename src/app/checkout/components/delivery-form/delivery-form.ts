@@ -1,4 +1,13 @@
-import { AfterViewInit, Component, computed, effect, inject, input, output, signal } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  computed,
+  effect,
+  inject,
+  input,
+  output,
+  signal,
+} from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NotificationService } from '@shared';
 import { CheckoutService, CheckoutData } from '@checkout';
@@ -13,12 +22,12 @@ import { CommonModule } from '@angular/common';
 })
 export class DeliveryForm {
   private fb = inject(FormBuilder);
-  
-  initialData = input<Partial<CheckoutData>>()
-  addressSuggestions = input<AddressSuggestion[]>([])
-  
-  formSubmit = output<CheckoutData>()
-  addressSearch = output<string>()
+
+  initialData = input<Partial<CheckoutData>>();
+  addressSuggestions = input<AddressSuggestion[]>([]);
+
+  formSubmit = output<CheckoutData>();
+  addressSearch = output<string>();
   selectedSuggestionIndex = signal(-1);
 
   deliveryForm = this.fb.group({
@@ -30,7 +39,7 @@ export class DeliveryForm {
     deliveryDate: ['', Validators.required],
     deliveryTime: ['', Validators.required],
     sameAsBilling: [false],
-    notes: ['']
+    notes: [''],
   });
 
   timeSlots = [
@@ -40,7 +49,7 @@ export class DeliveryForm {
     { value: '12:00-13:00', label: '12:00 - 13:00' },
     { value: '16:00-17:00', label: '16:00 - 17:00' },
     { value: '17:00-18:00', label: '17:00 - 18:00' },
-    { value: '18:00-19:00', label: '18:00 - 19:00' }
+    { value: '18:00-19:00', label: '18:00 - 19:00' },
   ];
 
   minDate = new Date().toISOString().split('T')[0];
@@ -59,14 +68,12 @@ export class DeliveryForm {
     switch (event.key) {
       case 'ArrowDown':
         event.preventDefault();
-        this.selectedSuggestionIndex.update(i => 
-          i < suggestions.length - 1 ? i + 1 : i
-        );
+        this.selectedSuggestionIndex.update((i) => (i < suggestions.length - 1 ? i + 1 : i));
         break;
 
       case 'ArrowUp':
         event.preventDefault();
-        this.selectedSuggestionIndex.update(i => i > 0 ? i - 1 : 0);
+        this.selectedSuggestionIndex.update((i) => (i > 0 ? i - 1 : 0));
         break;
 
       case 'Enter':
@@ -94,12 +101,12 @@ export class DeliveryForm {
 
   selectAddress(suggestion: AddressSuggestion) {
     this.deliveryForm.patchValue({
-      deliveryAddress: suggestion.place_name
+      deliveryAddress: suggestion.place_name,
     });
-    this.addressSearch.emit('')
+    this.addressSearch.emit('');
     this.selectedSuggestionIndex.set(-1);
   }
-onSubmit() {
+  onSubmit() {
     if (this.deliveryForm.invalid) {
       this.deliveryForm.markAllAsTouched();
       return;
@@ -116,13 +123,13 @@ onSubmit() {
   getError(fieldName: string): string {
     const field = this.deliveryForm.get(fieldName);
     if (!field?.errors) return '';
-    
+
     if (field.errors['required']) return 'Campo obligatorio';
     if (field.errors['email']) return 'Email inválido';
-    if (field.errors['minlength']) return `Mínimo ${field.errors['minlength'].requiredLength} caracteres`;
+    if (field.errors['minlength'])
+      return `Mínimo ${field.errors['minlength'].requiredLength} caracteres`;
     if (field.errors['pattern']) return 'Teléfono inválido (9 dígitos)';
-    
+
     return 'Campo inválido';
   }
 }
-

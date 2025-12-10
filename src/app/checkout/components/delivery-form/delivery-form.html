@@ -1,16 +1,13 @@
-
 <form [formGroup]="deliveryForm" (ngSubmit)="onSubmit()">
-  
   <div class="bg-white rounded-lg shadow-lg p-6 space-y-6">
-    
     <section>
       <h2 class="text-2xl font-bold text-primary mb-4">Datos de contacto</h2>
-      
+
       <div class="mb-4">
         <label for="name" class="label">
           <span class="label-text font-semibold">Nombre completo *</span>
         </label>
-        <input 
+        <input
           id="name"
           type="text"
           formControlName="customerName"
@@ -28,7 +25,7 @@
         <label for="email" class="label">
           <span class="label-text font-semibold">Email *</span>
         </label>
-        <input 
+        <input
           id="email"
           type="email"
           formControlName="customerEmail"
@@ -46,7 +43,7 @@
         <label for="phone" class="label">
           <span class="label-text font-semibold">Teléfono *</span>
         </label>
-        <input 
+        <input
           id="phone"
           type="tel"
           formControlName="customerPhone"
@@ -65,35 +62,36 @@
 
     <section>
       <h2 class="text-2xl font-bold text-primary mb-4">Dirección de entrega</h2>
-      
+
       <div class="mb-4 relative">
         <label for="address" class="label">
           <span class="label-text font-semibold">Dirección *</span>
         </label>
-        <input 
-            id="address"
-            type="text"
-            formControlName="deliveryAddress"
-            (input)="onAddressInput($event)"
-            (keydown)="onAddressKeydown($event)"
-            placeholder="Escribe tu dirección..."
-            class="input input-bordered w-full"
-            [class.input-error]="hasError('deliveryAddress')"
-            aria-required="true"
-            aria-autocomplete="list"
-            [attr.aria-expanded]="addressSuggestions().length > 0"
-            aria-controls="address-suggestions"
-            autocomplete="off"
+        <input
+          id="address"
+          type="text"
+          formControlName="deliveryAddress"
+          (input)="onAddressInput($event)"
+          (keydown)="onAddressKeydown($event)"
+          placeholder="Escribe tu dirección..."
+          class="input input-bordered w-full"
+          [class.input-error]="hasError('deliveryAddress')"
+          aria-required="true"
+          aria-autocomplete="list"
+          [attr.aria-expanded]="addressSuggestions().length > 0"
+          aria-controls="address-suggestions"
+          autocomplete="off"
         />
-        
+
         @if (addressSuggestions().length > 0) {
-            <ul 
+          <ul
             id="address-suggestions"
             class="absolute z-10 w-full bg-white border border-border rounded-lg shadow-lg mt-1 max-h-60 overflow-auto"
             role="listbox"
-            aria-label="Sugerencias de dirección">
+            aria-label="Sugerencias de dirección"
+          >
             @for (suggestion of addressSuggestions(); track suggestion.id; let i = $index) {
-                <li 
+              <li
                 (click)="selectAddress(suggestion)"
                 (mouseenter)="selectedSuggestionIndex.set(i)"
                 [class.bg-primary]="selectedSuggestionIndex() === i"
@@ -101,13 +99,14 @@
                 [class.hover:bg-secondary]="selectedSuggestionIndex() !== i"
                 class="px-4 py-2 cursor-pointer transition-colors"
                 role="option"
-                [attr.aria-selected]="selectedSuggestionIndex() === i">
+                [attr.aria-selected]="selectedSuggestionIndex() === i"
+              >
                 {{ suggestion.place_name }}
-                </li>
+              </li>
             }
-            </ul>
+          </ul>
         }
-        
+
         @if (hasError('deliveryAddress')) {
           <p class="text-error text-sm mt-1">{{ getError('deliveryAddress') }}</p>
         }
@@ -117,7 +116,7 @@
         <label for="details" class="label">
           <span class="label-text font-semibold">Detalles adicionales (opcional)</span>
         </label>
-        <input 
+        <input
           id="details"
           type="text"
           formControlName="deliveryDetails"
@@ -128,41 +127,40 @@
     </section>
 
     <div class="mb-4">
-  <div class="form-control">
-    <label class="label cursor-pointer justify-start gap-3">
-      <input 
-        type="checkbox"
-        formControlName="sameAsBilling"
-        class="checkbox checkbox-primary"
-      />
-      <span class="label-text">
-        La dirección de facturación es la misma que la de entrega.
-      </span>
-    </label>
-  </div>
+      <div class="form-control">
+        <label class="label cursor-pointer justify-start gap-3">
+          <input
+            type="checkbox"
+            formControlName="sameAsBilling"
+            class="checkbox checkbox-primary"
+          />
+          <span class="label-text">
+            La dirección de facturación es la misma que la de entrega.
+          </span>
+        </label>
+      </div>
 
-    @if (deliveryForm.get('sameAsBilling')?.value) {
-    <div class="alert alert-info bg-background mt-2">
-        <span aria-hidden="true">ℹ️</span>
-        <p class="text-sm text-text">
-        Si necesitas una dirección de facturación diferente, indícala en las 
-        <strong>notas especiales</strong> al final del formulario.
-        </p>
-    </div>
-    }
+      @if (deliveryForm.get('sameAsBilling')?.value) {
+        <div class="alert alert-info bg-background mt-2">
+          <span aria-hidden="true">ℹ️</span>
+          <p class="text-sm text-text">
+            Si necesitas una dirección de facturación diferente, indícala en las
+            <strong>notas especiales</strong> al final del formulario.
+          </p>
+        </div>
+      }
     </div>
     <div class="divider"></div>
 
     <section>
       <h2 class="text-2xl font-bold text-primary mb-4">Fecha y hora de entrega</h2>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label for="date" class="label">
             <span class="label-text font-semibold">Fecha *</span>
           </label>
-          <input 
+          <input
             id="date"
             type="date"
             formControlName="deliveryDate"
@@ -180,12 +178,13 @@
           <label for="time" class="label">
             <span class="label-text font-semibold">Franja horaria *</span>
           </label>
-          <select 
+          <select
             id="time"
             formControlName="deliveryTime"
             class="select select-bordered w-full"
             [class.select-error]="hasError('deliveryTime')"
-            aria-required="true">
+            aria-required="true"
+          >
             <option value="" disabled>Selecciona una franja</option>
             @for (slot of timeSlots; track slot.value) {
               <option [value]="slot.value">{{ slot.label }}</option>
@@ -202,8 +201,8 @@
 
     <section>
       <h2 class="text-2xl font-bold text-primary mb-4">Notas especiales (opcional)</h2>
-      
-      <textarea 
+
+      <textarea
         formControlName="notes"
         rows="3"
         placeholder="Dedicatoria, instrucciones especiales..."
@@ -214,13 +213,13 @@
       </p>
     </section>
 
-    <button 
+    <button
       type="submit"
-    [disabled]="deliveryForm.invalid"
+      [disabled]="deliveryForm.invalid"
       class="btn btn-primary btn-lg w-full"
-      aria-label="Confirmar pedido">
+      aria-label="Confirmar pedido"
+    >
       💳 Proceder al pago
     </button>
-
   </div>
 </form>

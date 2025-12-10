@@ -12,17 +12,14 @@ import { CurrencyPipe } from '@angular/common';
 })
 export class Navbar {
   authService = inject(AuthService);
-  cartService = inject(CartService)
+  cartService = inject(CartService);
   router = inject(Router);
 
-  totalItemsCount = computed(() => this.cartService.totalItemsCount())
-  cartTotal = computed(() =>this.cartService.cartTotal())
+  totalItemsCount = computed(() => this.cartService.totalItemsCount());
+  cartTotal = computed(() => this.cartService.cartTotal());
 
   onLogout() {
     this.authService.logout();
     this.router.navigate(['/']);
   }
-
-
-
 }

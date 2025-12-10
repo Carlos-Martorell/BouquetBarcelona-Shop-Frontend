@@ -1,6 +1,17 @@
-<div class="container mx-auto px-4 py-8 max-w-6xl" role="region" aria-labelledby="product-name" aria-label="Detalle del producto">
+<div
+  class="container mx-auto px-4 py-8 max-w-6xl"
+  role="region"
+  aria-labelledby="product-name"
+  aria-label="Detalle del producto"
+>
   @if (loading()) {
-    <div class="flex justify-center py-20" role="status" aria-live="polite" aria-atomic="true" aria-label="Cargando producto">
+    <div
+      class="flex justify-center py-20"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label="Cargando producto"
+    >
       <div class="loading loading-spinner loading-lg text-primary"></div>
     </div>
   }
@@ -23,7 +34,11 @@
           />
         </figure>
 
-        <div class="flex gap-2 overflow-x-auto pb-2" role="list" aria-label="Miniaturas de imágenes">
+        <div
+          class="flex gap-2 overflow-x-auto pb-2"
+          role="list"
+          aria-label="Miniaturas de imágenes"
+        >
           @for (image of flower()!.images; track $index) {
             <button
               (click)="selectImage($index)"
@@ -50,20 +65,42 @@
           <span id="product-name">{{ flower()!.name }}</span>
         </div>
 
-        <h1 id="product-name" class="text-4xl font-display font-bold text-primary mb-2" aria-hidden="true">
+        <h1
+          id="product-name"
+          class="text-4xl font-display font-bold text-primary mb-2"
+          aria-hidden="true"
+        >
           {{ flower()!.name }}
         </h1>
 
-        <p id="product-price" class="text-3xl font-bold text-secondary mb-6" role="text" aria-label="Precio del producto">{{ flower()!.price }}€</p>
+        <p
+          id="product-price"
+          class="text-3xl font-bold text-secondary mb-6"
+          role="text"
+          aria-label="Precio del producto"
+        >
+          {{ flower()!.price }}€
+        </p>
 
-        <p id="product-description" class="text-text mb-6 leading-relaxed" role="region" aria-label="Descripción del producto">
+        <p
+          id="product-description"
+          class="text-text mb-6 leading-relaxed"
+          role="region"
+          aria-label="Descripción del producto"
+        >
           {{ flower()!.description }}
         </p>
 
         <div class="flex flex-wrap gap-2 mb-6" role="list" aria-label="Etiquetas del producto">
-          <span class="badge badge-lg bg-accent/20 text-accent" role="listitem">{{ flower()!.category | titlecase }}</span>
-          <span class="badge badge-lg bg-secondary/20 text-secondary" role="listitem">{{ flower()!.occasion | titlecase }}</span>
-          <span class="badge badge-lg bg-primary/20 text-primary" role="listitem">{{ flower()!.size | titlecase }}</span>
+          <span class="badge badge-lg bg-accent/20 text-accent" role="listitem">{{
+            flower()!.category | titlecase
+          }}</span>
+          <span class="badge badge-lg bg-secondary/20 text-secondary" role="listitem">{{
+            flower()!.occasion | titlecase
+          }}</span>
+          <span class="badge badge-lg bg-primary/20 text-primary" role="listitem">{{
+            flower()!.size | titlecase
+          }}</span>
         </div>
 
         <div class="mb-6">
@@ -78,12 +115,24 @@
         </div>
 
         @if (flower()!.stock > 0) {
-          <p class="text-success mb-4 flex items-center gap-2" role="status" aria-live="polite" aria-atomic="true" aria-label="Estado de stock">
+          <p
+            class="text-success mb-4 flex items-center gap-2"
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+            aria-label="Estado de stock"
+          >
             <span class="text-xl">✓</span>
             <span>Disponible</span>
           </p>
         } @else {
-          <p class="text-error mb-4 flex items-center gap-2" role="status" aria-live="polite" aria-atomic="true" aria-label="Estado de stock">
+          <p
+            class="text-error mb-4 flex items-center gap-2"
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+            aria-label="Estado de stock"
+          >
             <span class="text-xl">✗</span>
             <span>Agotado</span>
           </p>
@@ -94,9 +143,24 @@
         <div class="flex items-center gap-4 mb-6" role="group" aria-label="Controles de cantidad">
           <span class="text-text font-medium">Cantidad:</span>
           <div class="join" role="toolbar" aria-label="Ajustar cantidad">
-            <button (click)="decrementQuantity()" class="btn btn-sm join-item" aria-label="Disminuir cantidad">−</button>
-            <div class="join-item flex items-center justify-center bg-base-200 px-6" aria-hidden="true">
-              <span id="product-quantity" class="text-lg font-bold" aria-live="polite" aria-atomic="true">{{ quantity() }}</span>
+            <button
+              (click)="decrementQuantity()"
+              class="btn btn-sm join-item"
+              aria-label="Disminuir cantidad"
+            >
+              −
+            </button>
+            <div
+              class="join-item flex items-center justify-center bg-base-200 px-6"
+              aria-hidden="true"
+            >
+              <span
+                id="product-quantity"
+                class="text-lg font-bold"
+                aria-live="polite"
+                aria-atomic="true"
+                >{{ quantity() }}</span
+              >
             </div>
             <button
               (click)="incrementQuantity()"
@@ -123,14 +187,22 @@
           }
         </button>
 
-        <button (click)="goBack()" class="btn btn-ghost w-full border-primary/40" aria-label="Seguir comprando">
+        <button
+          (click)="goBack()"
+          class="btn btn-ghost w-full border-primary/40"
+          aria-label="Seguir comprando"
+        >
           ← Seguir comprando
         </button>
 
         <div class="divider"></div>
 
         @if (flower()!.careInstructions) {
-          <div class="bg-success/10 rounded-lg p-6 border border-success/20" role="region" aria-label="Cuidados y conservación">
+          <div
+            class="bg-success/10 rounded-lg p-6 border border-success/20"
+            role="region"
+            aria-label="Cuidados y conservación"
+          >
             <h3 class="text-lg font-bold text-success mb-3 flex items-center gap-2">
               Cuidados y conservación
             </h3>
