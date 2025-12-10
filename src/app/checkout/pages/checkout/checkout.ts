@@ -44,6 +44,7 @@ export class Checkout {
       this.router.navigate(['/cart'])
       return;;
     }
+    this.isProcessing.set(false) 
       const paymentStatus = this.route.snapshot.queryParams['payment'];
   if (paymentStatus === 'cancelled') {
     this.notificationService.showError('Pago cancelado. Puedes intentarlo de nuevo.');
