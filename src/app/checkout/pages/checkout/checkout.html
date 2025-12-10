@@ -1,1 +1,62 @@
-<p>checkout works!</p>
+<div class="container mx-auto px-4 py-8 max-w-6xl">
+  
+  <header class="mb-8">
+    <h1 class="text-4xl font-display font-bold text-primary mb-2">
+      Finalizar compra
+    </h1>
+    <p class="text-text/70">
+      Completa los datos de entrega para confirmar tu pedido
+    </p>
+  </header>
+
+  @if (!isLoggedIn()) {
+    <div 
+      class="alert bg-primary/10 border border-primary/20 mb-8" 
+      role="alert">
+      <span aria-hidden="true">💡</span>
+      <div>
+        <p class="font-semibold text-primary">¿Ya tienes cuenta?</p>
+        <p class="text-sm text-text/70">Inicia sesión para autocompletar tus datos</p>
+      </div>
+      <button 
+        (click)="onLogin()"
+        class="btn btn-sm btn-primary"
+        aria-label="Iniciar sesión">
+        Iniciar sesión
+      </button>
+    </div>
+  }
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    
+    <div class="lg:col-span-2">
+      <app-delivery-form
+        [initialData]="initialData()"
+        [addressSuggestions]="addressSuggestions()"
+        (formSubmit)="onFormSubmit($event)"
+        (addressSearch)="onAddressSearch($event)"
+      />
+    </div>
+
+    <div class="lg:col-span-1">
+      <div class="sticky top-8">
+        <app-order-summary />
+      </div>
+    </div>
+
+  </div>
+
+  @if (isProcessing()) {
+    <div 
+      class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50"
+      role="status"
+      aria-label="Procesando pedido">
+      <div class="bg-white rounded-lg p-8 text-center max-w-sm">
+        <div class="loading loading-spinner loading-lg text-primary mb-4"></div>
+        <p class="text-xl font-semibold mb-2">Procesando tu pedido...</p>
+        <p class="text-text/70 text-sm">Serás redirigido a la pasarela de pago</p>
+      </div>
+    </div>
+  }
+
+</div>

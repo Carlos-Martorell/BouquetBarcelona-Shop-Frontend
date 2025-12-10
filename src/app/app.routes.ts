@@ -32,10 +32,16 @@ export const routes: Routes = [
           import('./checkout/pages/checkout/checkout').then((m) => m.Checkout),
         title: 'Checkout',
       },
-    {
-            path: '**',
-            redirectTo: 'catalog',
-    },
+      {
+        path: 'success',
+        loadComponent: () => 
+          import('./checkout/pages/success/success').then(m => m.Success),
+        title: 'Pago exitoso'
+      },
+      {
+              path: '**',
+              redirectTo: 'catalog',
+      },
     ],
   },
   {

@@ -1,5 +1,5 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { Spinner } from '@app/shared';
+import { Spinner } from '@shared';
 import { Flower, FlowersService, ProductGrid, SearchBar } from '@catalog';
 
 @Component({

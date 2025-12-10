@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AuthService } from '@auth';
 import { NotificationService } from '@shared';
 
@@ -15,10 +15,19 @@ export class Login {
   private fb = inject(FormBuilder);
   private authService = inject(AuthService);
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
   private notificationService = inject(NotificationService);
 
   loading = signal(false);
   errorMessage = signal('');
+  private redirectUrl = signal('/');
+
+  ngOnInit() {
+    const redirect = this.route.snapshot.queryParams['redirect'];
+    if (redirect) {
+      this.redirectUrl.set(redirect);
+    }
+  }
 
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -39,7 +48,7 @@ export class Login {
     this.authService.login(email!, password!).subscribe({
       next: () => {
         this.notificationService.showSuccess('¡Bienvenido!');
-        this.router.navigate(['/']);
+        this.router.navigate([this.redirectUrl()]);
       },
       error: (err) => {
         const message = this.getErrorMessage(err);

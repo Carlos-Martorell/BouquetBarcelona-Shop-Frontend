@@ -61,3 +61,36 @@ readonly isAdmin = computed(() => this.currentUser()?.role === 'admin');
 fix(cart): Guard localStorage access against SSR environments
 
 Addresses the "ReferenceError: localStorage is not defined" error encountered during server-side rendering (SSR) by ensuring all browser-specific operations, such as calling loadCart() and initializing the persistence effect, are gated using isPlatformBrowser.
+
+
+## ⚠️ SSR Desactivado (Vercel Deploy Fix)
+
+Este proyecto usa **Client-Side Rendering (CSR)** en lugar de SSR por las siguientes razones:
+
+### Por qué CSR en lugar de SSR:
+1. **Rutas dinámicas** (`/catalog/:id`) causaban errores de prerendering en Vercel
+2. **PWA** (próximamente) no requiere SSR
+3. **E-commerce client-side** con carrito en localStorage
+4. **Simplifica deployment** y reduce complejidad
+5. **Mejora tiempo de build** en Vercel
+
+### Configuración actual:
+```json
+// angular.json
+"outputMode": "static",
+"prerender": false
+```
+
+### Para reactivar SSR en el futuro:
+1. Cambiar `"outputMode": "static"` → `"outputMode": "server"`
+2. Añadir `"server": "src/main.server.ts"`
+3. Implementar `getPrerenderParams()` en `server.ts` para rutas dinámicas
+4. Añadir `"ssr": { "entry": "src/server.ts" }`
+
+### Archivos SSR presentes pero NO usados:
+- `src/main.server.ts`
+- `src/app/app.config.server.ts`
+- `server.ts`
+
+Estos archivos se mantienen para facilitar migración futura a SSR si se necesita SEO avanzado.
+```
