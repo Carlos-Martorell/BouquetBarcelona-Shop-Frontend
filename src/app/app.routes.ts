@@ -36,16 +36,16 @@ export const routes: Routes = [
         title: 'Pago exitoso',
       },
       {
+        path: 'orders',
+        canActivate: [authGuard],
+        loadComponent: () => import('./orders/pages/orders-list/orders-list').then((m) => m.OrdersList),
+        title: 'Mis pedidos',
+      },
+      {
         path: '**',
         redirectTo: 'catalog',
       },
-      {
-        path: 'orders',
-        canActivate: [authGuard],
-        loadComponent: () =>
-          import('./orders/pages/orders-list/orders-list').then((m) => m.OrdersList),
-        title: 'Mis pedidos',
-      },
+
     ],
   },
   {
@@ -64,4 +64,5 @@ export const routes: Routes = [
     path: '**',
     redirectTo: 'catalog',
   },
+
 ];

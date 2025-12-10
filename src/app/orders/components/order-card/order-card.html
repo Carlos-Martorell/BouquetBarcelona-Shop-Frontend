@@ -1,1 +1,57 @@
-<p>order-card works!</p>
+
+<article 
+  class="card bg-white shadow-lg hover:shadow-xl transition-shadow border border-border"
+  [attr.aria-label]="'Pedido ' + getShortId(order()._id)">
+  
+  <div class="card-body">
+    
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="text-lg font-bold text-primary">
+        Pedido #{{ getShortId(order()._id) }}
+      </h3>
+      <span 
+        class="badge badge-lg"
+        [ngClass]="getStatusBadge(order().status)">
+        {{ getStatusText(order().status) }}
+      </span>
+    </div>
+
+    <div class="flex items-center gap-2 text-sm text-text/70 mb-3">
+      <span aria-hidden="true">📅</span>
+      <span>{{ order().deliveryDate | date:'dd/MM/yyyy' }}</span>
+      <span>•</span>
+      <span>{{ order().deliveryTime }}</span>
+    </div>
+
+    <div class="mb-4">
+      <p class="text-sm font-semibold text-text mb-2">Productos:</p>
+      <ul class="space-y-1">
+        @for (item of order().items.slice(0, 2); track item.flowerId) {
+          <li class="text-sm text-text/70 flex items-center gap-2">
+            <span aria-hidden="true">🌸</span>
+            <span>{{ item.flowerName }} × {{ item.quantity }}</span>
+          </li>
+        }
+        @if (order().items.length > 2) {
+          <li class="text-sm text-text/60">
+            +{{ order().items.length - 2 }} más
+          </li>
+        }
+      </ul>
+    </div>
+
+    <div class="flex items-center justify-between pt-3 border-t border-border">
+      <span class="text-text/70">Total:</span>
+      <span class="text-2xl font-bold text-primary">
+        {{ order().total | currency:'EUR' }}
+      </span>
+    </div>
+
+    <a 
+      [routerLink]="['/orders', order()._id]"
+      class="btn btn-primary btn-sm w-full mt-4">
+      Ver detalles
+    </a>
+
+  </div>
+</article>
