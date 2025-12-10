@@ -1,9 +1,8 @@
-import { AfterViewInit, Component, computed, effect, inject, signal } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, computed, inject, signal } from '@angular/core';
 import { NotificationService } from '@shared';
 import { CheckoutData, CheckoutService, DeliveryForm, OrderSummary } from '@checkout';
-import { AddressSuggestion, GeocodingService, OrdersService } from '@core';
-import { Router } from '@angular/router';
+import { AddressSuggestion, GeocodingService } from '@core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@auth';
 import { CartService } from '@cart';
 
@@ -16,6 +15,7 @@ import { CartService } from '@cart';
 })
 export class Checkout {
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
   private authService = inject(AuthService);
   private cartService = inject(CartService);
   private checkoutService = inject(CheckoutService);
@@ -41,8 +41,13 @@ export class Checkout {
     ngOnInit() {
     if (this.cartService.cartItems().length === 0) {
       this.notificationService.showError('Tu carrito está vacío');
-      this.router.navigate(['/cart']);
+      this.router.navigate(['/cart'])
+      return;;
     }
+      const paymentStatus = this.route.snapshot.queryParams['payment'];
+  if (paymentStatus === 'cancelled') {
+    this.notificationService.showError('Pago cancelado. Puedes intentarlo de nuevo.');
+  }
   }
 
   async onAddressSearch(query: string) {
