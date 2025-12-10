@@ -45,7 +45,7 @@ export class Checkout {
     }
   }
 
-    async onAddressSearch(query: string) {
+  async onAddressSearch(query: string) {
     const suggestions = await this.geocodingService.searchAddresses(query);
     this.addressSuggestions.set(suggestions);
   }

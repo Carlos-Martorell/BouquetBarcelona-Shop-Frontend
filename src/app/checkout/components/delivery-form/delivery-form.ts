@@ -19,6 +19,7 @@ export class DeliveryForm {
   
   formSubmit = output<CheckoutData>()
   addressSearch = output<string>()
+  selectedSuggestionIndex = signal(-1);
 
   deliveryForm = this.fb.group({
     customerName: ['', [Validators.required, Validators.minLength(3)]],
@@ -49,8 +50,42 @@ export class DeliveryForm {
       this.deliveryForm.patchValue(data);
     }
   }
+
+  onAddressKeydown(event: KeyboardEvent) {
+    const suggestions = this.addressSuggestions();
+    if (suggestions.length === 0) return;
+
+    switch (event.key) {
+      case 'ArrowDown':
+        event.preventDefault();
+        this.selectedSuggestionIndex.update(i => 
+          i < suggestions.length - 1 ? i + 1 : i
+        );
+        break;
+
+      case 'ArrowUp':
+        event.preventDefault();
+        this.selectedSuggestionIndex.update(i => i > 0 ? i - 1 : 0);
+        break;
+
+      case 'Enter':
+        event.preventDefault();
+        const index = this.selectedSuggestionIndex();
+        if (index >= 0 && index < suggestions.length) {
+          this.selectAddress(suggestions[index]);
+        }
+        break;
+
+      case 'Escape':
+        this.addressSearch.emit('');
+        this.selectedSuggestionIndex.set(-1);
+        break;
+    }
+  }
+
   onAddressInput(event: Event) {
     const query = (event.target as HTMLInputElement).value;
+    this.selectedSuggestionIndex.set(-1);
     if (query.length >= 3) {
       this.addressSearch.emit(query);
     }
@@ -61,6 +96,7 @@ export class DeliveryForm {
       deliveryAddress: suggestion.place_name
     });
     this.addressSearch.emit('')
+    this.selectedSuggestionIndex.set(-1);
   }
 onSubmit() {
     if (this.deliveryForm.invalid) {
