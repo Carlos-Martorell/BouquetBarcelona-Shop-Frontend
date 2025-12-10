@@ -50,20 +50,25 @@ export class Checkout {
     this.addressSuggestions.set(suggestions);
   }
 
-    onFormSubmit(data: CheckoutData) {
-    this.isProcessing.set(true);
+  onFormSubmit(data: CheckoutData) {
+  this.isProcessing.set(true);
 
-    this.checkoutService.createOrder(data).subscribe({
-      next: () => {
+  this.checkoutService.createOrder(data).subscribe({
+    next: async (order) => {
+      try {
+        await this.checkoutService.processPayment(order._id); 
+      } catch (error) {
         this.isProcessing.set(false);
-      },
-      error: (err) => {
-        this.isProcessing.set(false);
-        this.notificationService.showError('Error al crear el pedido');
-        console.error(err);
+        this.notificationService.showError('Error al procesar el pago');
       }
-    });
-  }
+    },
+    error: () => {
+      this.isProcessing.set(false);
+      this.notificationService.showError('Error al crear el pedido');
+    }
+  });
+  }   
+
 
     onLogin() {
     this.checkoutService.redirectToLogin();

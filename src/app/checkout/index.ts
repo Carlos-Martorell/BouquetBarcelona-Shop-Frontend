@@ -3,4 +3,5 @@ export * from './model/checkout-data';
 export * from './components/delivery-form/delivery-form';
 export * from './components/order-summary/order-summary';
 export * from './pages/checkout/checkout';
+export * from './pages/success/success';
 

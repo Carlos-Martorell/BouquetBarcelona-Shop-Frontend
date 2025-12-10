@@ -18,6 +18,8 @@ export interface Order {
   notes?: string;
   createdAt?: string;
   updatedAt?: string;
+  paymentStatus?: 'pending' | 'paid' | 'failed';
+  stripeSessionId?: string;
 }
 
 export interface OrderItem {

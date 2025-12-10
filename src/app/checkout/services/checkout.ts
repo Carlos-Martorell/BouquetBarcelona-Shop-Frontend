@@ -5,6 +5,7 @@ import { NotificationService } from '@shared';
 import { CreateOrder, OrderItem, OrdersService } from '@core';
 import { CheckoutData } from '@checkout';
 import { tap } from 'rxjs';
+import { environment } from '@env/environments';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,7 @@ export class CheckoutService {
 
   cartItems = this.cartService.cartItems()
   cartTotal = this.cartService.cartTotal()
-  clearCart = this.cartService.clearCart()
+
 
   createOrder(checkoutData: CheckoutData) {
 
@@ -44,11 +45,9 @@ export class CheckoutService {
 
 
     return this.ordersService.create(order).pipe(
-      tap(createdOrder => {
-        this.clearCart;
+      tap(() => {
+        this.cartService.clearCart();
         this.notificationService.showSuccess('¡Pedido confirmado!');
-        
-        this.router.navigate(['/orders', createdOrder._id]);
       })
     );
   }
@@ -59,4 +58,24 @@ export class CheckoutService {
       queryParams: { redirect: '/checkout' }
     });
   }
+
+  async processPayment(orderId: string) {
+  try {
+    const response = await fetch(`${environment.apiUrl}/api/stripe/create-checkout-session`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ orderId }) 
+    });
+
+    if (!response.ok) {
+      throw new Error('Error creating payment session');
+    }
+
+    const { url } = await response.json();
+    window.location.href = url;
+  } catch (error) {
+    console.error('Payment error:', error);
+    throw error;
+  }
+}
 }
