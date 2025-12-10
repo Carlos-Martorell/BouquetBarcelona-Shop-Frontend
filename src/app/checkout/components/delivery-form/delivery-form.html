@@ -127,6 +127,30 @@
       </div>
     </section>
 
+    <div class="mb-4">
+  <div class="form-control">
+    <label class="label cursor-pointer justify-start gap-3">
+      <input 
+        type="checkbox"
+        formControlName="sameAsBilling"
+        class="checkbox checkbox-primary"
+      />
+      <span class="label-text">
+        La dirección de facturación es la misma que la de entrega.
+      </span>
+    </label>
+  </div>
+
+    @if (!deliveryForm.get('sameAsBilling')?.value) {
+    <div class="alert alert-info bg-background mt-2">
+        <span aria-hidden="true">ℹ️</span>
+        <p class="text-sm text-text">
+        Si necesitas una dirección de facturación diferente, indícala en las 
+        <strong>notas especiales</strong> al final del formulario.
+        </p>
+    </div>
+    }
+    </div>
     <div class="divider"></div>
 
     <section>
