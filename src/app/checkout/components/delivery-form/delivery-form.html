@@ -141,7 +141,7 @@
     </label>
   </div>
 
-    @if (!deliveryForm.get('sameAsBilling')?.value) {
+    @if (deliveryForm.get('sameAsBilling')?.value) {
     <div class="alert alert-info bg-background mt-2">
         <span aria-hidden="true">ℹ️</span>
         <p class="text-sm text-text">

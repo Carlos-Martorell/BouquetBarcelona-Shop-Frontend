@@ -29,6 +29,7 @@ export class DeliveryForm {
     deliveryDetails: [''],
     deliveryDate: ['', Validators.required],
     deliveryTime: ['', Validators.required],
+    sameAsBilling: [false],
     notes: ['']
   });
 
