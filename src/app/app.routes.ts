@@ -3,6 +3,18 @@ import { MainLayout } from './layouts/main-layout/main-layout';
 import { authGuard, guestGuard } from './auth';
 
 export const routes: Routes = [
+   {
+    path: 'login',
+    canActivate: [guestGuard],
+    loadComponent: () => import('./auth/pages/login/login').then((m) => m.Login),
+    title: 'Iniciar Sesión',
+  },
+  {
+    path: 'register',
+    canActivate: [guestGuard],
+    loadComponent: () => import('./auth/pages/register/register').then((m) => m.Register),
+    title: 'Registrarse',
+  },
   {
     path: '',
     component: MainLayout,
@@ -48,21 +60,4 @@ export const routes: Routes = [
 
     ],
   },
-  {
-    path: 'login',
-    canActivate: [guestGuard],
-    loadComponent: () => import('./auth/pages/login/login').then((m) => m.Login),
-    title: 'Iniciar Sesión',
-  },
-  {
-    path: 'register',
-    canActivate: [guestGuard],
-    loadComponent: () => import('./auth/pages/register/register').then((m) => m.Register),
-    title: 'Registrarse',
-  },
-  {
-    path: '**',
-    redirectTo: 'catalog',
-  },
-
 ];
