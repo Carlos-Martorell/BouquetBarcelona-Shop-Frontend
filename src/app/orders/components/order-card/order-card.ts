@@ -8,7 +8,7 @@ import { Order } from '@core';
   selector: 'app-order-card',
   standalone: true,
   imports: [CommonModule, CurrencyPipe, DatePipe],
-  templateUrl: './order-card.html'
+  templateUrl: './order-card.html',
 })
 export class OrderCard {
   order = input.required<Order>();
@@ -18,7 +18,7 @@ export class OrderCard {
       pending: 'badge-warning',
       confirmed: 'badge-info',
       delivered: 'badge-success',
-      cancelled: 'badge-error'
+      cancelled: 'badge-error',
     };
     return badges[status] || 'badge-ghost';
   }
@@ -28,7 +28,7 @@ export class OrderCard {
       pending: 'Pendiente',
       confirmed: 'Confirmado',
       delivered: 'Entregado',
-      cancelled: 'Cancelado'
+      cancelled: 'Cancelado',
     };
     return texts[status] || status;
   }

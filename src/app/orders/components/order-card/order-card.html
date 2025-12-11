@@ -1,31 +1,27 @@
-
-<article 
+<article
   class="card bg-white shadow-lg hover:shadow-xl transition-shadow border border-border"
-  [attr.aria-label]="'Pedido ' + getShortId(order()._id)">
-  
+  [attr.aria-label]="'Pedido ' + getShortId(order()._id)"
+>
   <div class="card-body">
-    
     <div class="flex items-center justify-between mb-4">
-      <h3 class="text-lg font-bold text-primary">
-        Pedido #{{ getShortId(order()._id) }}
-      </h3>
-      <span 
-        class="badge badge-lg"
-        [ngClass]="getStatusBadge(order().status)">
+      <h3 class="text-lg font-bold text-primary">Pedido #{{ getShortId(order()._id) }}</h3>
+      <span class="badge badge-lg" [ngClass]="getStatusBadge(order().status)">
         {{ getStatusText(order().status) }}
       </span>
     </div>
 
     <div class="flex items-center gap-2 text-xs text-text/60 mb-3">
       <span aria-hidden="true">🕐</span>
-      <span>Pedido el {{ order().createdAt | date:'dd/MM/yyyy HH:mm' }}</span>
+      <span>Pedido el {{ order().createdAt | date: 'dd/MM/yyyy HH:mm' }}</span>
     </div>
 
-    <div class="flex items-center gap-2 text-sm font-semibold text-text mb-4 p-3 bg-primary/5 rounded-lg">
+    <div
+      class="flex items-center gap-2 text-sm font-semibold text-text mb-4 p-3 bg-primary/5 rounded-lg"
+    >
       <span aria-hidden="true">🚲</span>
       <div>
         <p class="text-xs text-text/70">Entrega programada:</p>
-        <p>{{ order().deliveryDate | date:'dd/MM/yyyy' }} • {{ order().deliveryTime }}</p>
+        <p>{{ order().deliveryDate | date: 'dd/MM/yyyy' }} • {{ order().deliveryTime }}</p>
       </div>
     </div>
 
@@ -49,7 +45,9 @@
         @for (item of order().items; track item.flowerId) {
           <li class="text-sm text-text/70 flex items-center justify-between">
             <span>{{ item.flowerName }} × {{ item.quantity }}</span>
-            <span class="text-xs text-text/50">{{ item.price * item.quantity | currency:'EUR' }}</span>
+            <span class="text-xs text-text/50">{{
+              item.price * item.quantity | currency: 'EUR'
+            }}</span>
           </li>
         }
       </ul>
@@ -68,9 +66,8 @@
     <div class="flex items-center justify-between pt-3 border-t border-border">
       <span class="text-text/70 font-semibold">Total pagado:</span>
       <span class="text-2xl font-bold text-primary">
-        {{ order().total | currency:'EUR' }}
+        {{ order().total | currency: 'EUR' }}
       </span>
     </div>
-
   </div>
 </article>

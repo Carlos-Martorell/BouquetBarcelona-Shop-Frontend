@@ -6,7 +6,7 @@ import { Flower } from '@catalog';
 describe('CartService', () => {
   let service: CartService;
 
-    const mockFlower: Flower = {
+  const mockFlower: Flower = {
     _id: '1',
     name: 'Rosa Roja',
     price: 15,
@@ -16,9 +16,8 @@ describe('CartService', () => {
     stock: 22,
     size: 'mediano',
     colors: ['rojo'],
-    occasion: 'amor'
+    occasion: 'amor',
   };
-
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
@@ -30,7 +29,6 @@ describe('CartService', () => {
     localStorage.clear();
   });
 
-
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
@@ -41,7 +39,7 @@ describe('CartService', () => {
     expect(service.cartTotal()).toBe(0);
   });
 
-    it('should add item to cart', () => {
+  it('should add item to cart', () => {
     service.addToCart(mockFlower, 2);
 
     expect(service.cartItems().length).toBe(1);
@@ -50,7 +48,7 @@ describe('CartService', () => {
     expect(service.totalItemsCount()).toBe(2);
   });
 
-    it('should increment quantity if item already exists', () => {
+  it('should increment quantity if item already exists', () => {
     service.addToCart(mockFlower, 1);
     service.addToCart(mockFlower, 2);
 
@@ -59,13 +57,13 @@ describe('CartService', () => {
     expect(service.totalItemsCount()).toBe(3);
   });
 
-    it('should calculate total correctly', () => {
+  it('should calculate total correctly', () => {
     service.addToCart(mockFlower, 2);
 
-    expect(service.cartTotal()).toBe(30); 
+    expect(service.cartTotal()).toBe(30);
   });
 
-    it('should update quantity', () => {
+  it('should update quantity', () => {
     service.addToCart(mockFlower, 2);
     service.updateQuantity(mockFlower._id, 5);
 
@@ -73,7 +71,7 @@ describe('CartService', () => {
     expect(service.totalItemsCount()).toBe(5);
   });
 
-    it('should remove item from cart', () => {
+  it('should remove item from cart', () => {
     service.addToCart(mockFlower, 2);
     service.removeFromCart(mockFlower._id);
 
@@ -81,15 +79,13 @@ describe('CartService', () => {
     expect(service.totalItemsCount()).toBe(0);
   });
 
-    it('should clear cart', () => {
+  it('should clear cart', () => {
     service.addToCart(mockFlower, 2);
     service.clearCart();
 
     expect(service.cartItems()).toEqual([]);
     expect(service.totalItemsCount()).toBe(0);
   });
-
-
 
   it('should load cart from localStorage on init', () => {
     const mockCart = [{ flower: mockFlower, quantity: 3 }];
@@ -103,5 +99,4 @@ describe('CartService', () => {
     expect(newService.cartItems()[0].quantity).toBe(3);
     expect(newService.cartItems()[0].flower.name).toBe('Rosa Roja');
   });
-
 });
