@@ -7,7 +7,7 @@ import { Order } from '@core';
 @Component({
   selector: 'app-order-card',
   standalone: true,
-  imports: [CommonModule, RouterLink, CurrencyPipe, DatePipe],
+  imports: [CommonModule, CurrencyPipe, DatePipe],
   templateUrl: './order-card.html'
 })
 export class OrderCard {
