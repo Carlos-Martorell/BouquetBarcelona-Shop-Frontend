@@ -11,12 +11,19 @@
   </header>
 
   @if (isLoading()) {
-    <div class="flex justify-center py-20">
-      <div class="loading loading-spinner loading-lg text-primary"></div>
+    <div
+      class="flex flex-col text-center justify-center py-20"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label="Cargando ordenes"
+    >
+      <p class="text-2xl text-text/50 mb-8">Cargando ordenes...</p>
+      <app-spinner />
     </div>
   }
 
-  @if (!isLoading() && userOrders().length === 0) {
+  @if (!isLoading() && (userOrders().length) === 0) {
     <div 
       class="text-center py-20 bg-white rounded-lg border border-border"
       role="status">
@@ -30,7 +37,7 @@
     </div>
   }
 
-  @if (!isLoading() && userOrders().length > 0) {
+  @if (!isLoading() && (userOrders().length) > 0) {
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       @for (order of userOrders(); track order._id) {
         <app-order-card [order]="order" />

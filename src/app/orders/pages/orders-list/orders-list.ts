@@ -2,12 +2,14 @@
 import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@auth';
-import { OrdersService } from '@core';
+import { Order, OrdersService } from '@core';
+import { Spinner } from '@shared';
+import { OrderCard } from '@orders';
 
 @Component({
   selector: 'app-orders-list',
-  imports: [],
-  templateUrl: './orders-list.css',
+  imports: [Spinner, OrderCard],
+  templateUrl: './orders-list.html',
   styleUrl: './orders-list.css',
 })
 export class OrdersList implements OnInit {
@@ -20,8 +22,8 @@ export class OrdersList implements OnInit {
 
   userOrders = computed (() => {
     const user = this.authService.currentUser()
-    if(!user) return 
-    return this.ordersService.orders()
+    if(!user) return [] as Order[]
+    return this.ordersService.orders() || [] as Order[]
   })
 
   ngOnInit(): void {
@@ -36,7 +38,7 @@ export class OrdersList implements OnInit {
     })
   }
 
-  goHome(){
+  goToHome(){
     this.router.navigate(['/'])
   }
 }

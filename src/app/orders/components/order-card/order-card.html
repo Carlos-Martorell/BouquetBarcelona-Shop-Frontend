@@ -16,42 +16,61 @@
       </span>
     </div>
 
-    <div class="flex items-center gap-2 text-sm text-text/70 mb-3">
-      <span aria-hidden="true">📅</span>
-      <span>{{ order().deliveryDate | date:'dd/MM/yyyy' }}</span>
-      <span>•</span>
-      <span>{{ order().deliveryTime }}</span>
+    <div class="flex items-center gap-2 text-xs text-text/60 mb-3">
+      <span aria-hidden="true">🕐</span>
+      <span>Pedido el {{ order().createdAt | date:'dd/MM/yyyy HH:mm' }}</span>
+    </div>
+
+    <div class="flex items-center gap-2 text-sm font-semibold text-text mb-4 p-3 bg-primary/5 rounded-lg">
+      <span aria-hidden="true">🚲</span>
+      <div>
+        <p class="text-xs text-text/70">Entrega programada:</p>
+        <p>{{ order().deliveryDate | date:'dd/MM/yyyy' }} • {{ order().deliveryTime }}</p>
+      </div>
+    </div>
+
+    <div class="mb-4 text-sm">
+      <p class="font-semibold text-text mb-1 flex items-center gap-2">
+        <span aria-hidden="true">📍</span>
+        Dirección:
+      </p>
+      <p class="text-text/70 pl-6">{{ order().deliveryAddress }}</p>
+      @if (order().deliveryDetails) {
+        <p class="text-text/60 text-xs pl-6">{{ order().deliveryDetails }}</p>
+      }
     </div>
 
     <div class="mb-4">
-      <p class="text-sm font-semibold text-text mb-2">Productos:</p>
-      <ul class="space-y-1">
-        @for (item of order().items.slice(0, 2); track item.flowerId) {
-          <li class="text-sm text-text/70 flex items-center gap-2">
-            <span aria-hidden="true">🌸</span>
+      <p class="text-sm font-semibold text-text mb-2 flex items-center gap-2">
+        <span aria-hidden="true">🌸</span>
+        Productos:
+      </p>
+      <ul class="space-y-1 pl-6">
+        @for (item of order().items; track item.flowerId) {
+          <li class="text-sm text-text/70 flex items-center justify-between">
             <span>{{ item.flowerName }} × {{ item.quantity }}</span>
-          </li>
-        }
-        @if (order().items.length > 2) {
-          <li class="text-sm text-text/60">
-            +{{ order().items.length - 2 }} más
+            <span class="text-xs text-text/50">{{ item.price * item.quantity | currency:'EUR' }}</span>
           </li>
         }
       </ul>
     </div>
 
+    @if (order().notes) {
+      <div class="mb-4 p-2 bg-accent/5 rounded text-sm">
+        <p class="font-semibold text-text mb-1 flex items-center gap-2">
+          <span aria-hidden="true">💬</span>
+          Notas:
+        </p>
+        <p class="text-text/70 pl-6 italic">{{ order().notes }}</p>
+      </div>
+    }
+
     <div class="flex items-center justify-between pt-3 border-t border-border">
-      <span class="text-text/70">Total:</span>
+      <span class="text-text/70 font-semibold">Total pagado:</span>
       <span class="text-2xl font-bold text-primary">
         {{ order().total | currency:'EUR' }}
       </span>
     </div>
-
-    <a 
-      [routerLink]="['/orders', order()._id]"
-      class="btn btn-primary btn-sm w-full mt-4">
-      Ver detalles
-    </a>
 
   </div>
 </article>

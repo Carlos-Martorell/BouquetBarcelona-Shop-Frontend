@@ -96,11 +96,11 @@ a,
 }
 @layer components {
   .btn-primary {
-    @apply text-background bg-primary px-4 py-2 hover:bg-success whitespace-nowrap font-semibold rounded-lg transition-all transform hover:scale-105 shadow-xl cursor-pointer;
+    @apply text-background bg-primary  text-center px-4 py-2 hover:bg-success whitespace-nowrap font-semibold rounded-lg transition-all transform hover:scale-105 shadow-xl cursor-pointer;
   }
 
   .btn-secondary {
-    @apply text-background bg-secondary px-4 py-2 rounded-lg hover:opacity-75 whitespace-nowrap transition-all font-medium cursor-pointer;
+    @apply text-background bg-secondary text-center px-4 py-2 rounded-lg hover:opacity-75 whitespace-nowrap transition-all font-medium cursor-pointer;
   }
 }
 
