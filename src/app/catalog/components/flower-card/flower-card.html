@@ -4,8 +4,16 @@
   aria-roledescription="tarjeta"
   aria-label="Tarjeta de producto"
 >
-  <figure class="relative overflow-hidden aspect-square" aria-roledescription="carrusel" aria-label="Galería de imágenes del producto">
-    <div class="carousel carousel-vertical rounded-box h-96" role="group" aria-label="Imágenes del producto">
+  <figure
+    class="relative overflow-hidden aspect-square"
+    aria-roledescription="carrusel"
+    aria-label="Galería de imágenes del producto"
+  >
+    <div
+      class="carousel carousel-vertical rounded-box h-96"
+      role="group"
+      aria-label="Imágenes del producto"
+    >
       @for (image of flower().images; track $index) {
         <div class="carousel-item h-full" role="group" aria-hidden="false">
           <img
@@ -28,11 +36,19 @@
     </p>
 
     <div class="flex flex-wrap gap-2 mt-2" role="list" aria-label="Categoría y colores">
-      <span class="badge badge-sm bg-accent/20 text-accent border-0" role="listitem" aria-label="Categoría">
+      <span
+        class="badge badge-sm bg-accent/20 text-accent border-0"
+        role="listitem"
+        aria-label="Categoría"
+      >
         {{ flower().category }}
       </span>
       @for (color of flower().colors; track color) {
-        <span class="badge badge-sm bg-secondary/20 text-secondary border-0" role="listitem" aria-label="Color">
+        <span
+          class="badge badge-sm bg-secondary/20 text-secondary border-0"
+          role="listitem"
+          aria-label="Color"
+        >
           {{ color }}
         </span>
       }

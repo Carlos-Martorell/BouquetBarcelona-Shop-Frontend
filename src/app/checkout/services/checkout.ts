@@ -11,22 +11,20 @@ import { environment } from '@env/environments';
   providedIn: 'root',
 })
 export class CheckoutService {
-  private router = inject(Router)
-  private cartService = inject(CartService)
-  private ordersService = inject(OrdersService)
-  private notificationService = inject(NotificationService)
+  private router = inject(Router);
+  private cartService = inject(CartService);
+  private ordersService = inject(OrdersService);
+  private notificationService = inject(NotificationService);
 
-  cartItems = this.cartService.cartItems()
-  cartTotal = this.cartService.cartTotal()
-
+  cartItems = this.cartService.cartItems();
+  cartTotal = this.cartService.cartTotal();
 
   createOrder(checkoutData: CheckoutData) {
-
-    const orderItems: OrderItem[] = this.cartService.cartItems().map(item => ({
+    const orderItems: OrderItem[] = this.cartService.cartItems().map((item) => ({
       flowerId: item.flower._id,
       flowerName: item.flower.name,
       quantity: item.quantity,
-      price: item.flower.price
+      price: item.flower.price,
     }));
 
     const order: CreateOrder = {
@@ -40,42 +38,40 @@ export class CheckoutService {
       items: orderItems,
       total: this.cartService.cartTotal(),
       notes: checkoutData.notes,
-      status: 'pending'
+      status: 'pending',
     };
-
 
     return this.ordersService.create(order).pipe(
       tap(() => {
         this.cartService.clearCart();
         this.notificationService.showSuccess('¡Pedido confirmado!');
-      })
+      }),
     );
   }
 
-
   redirectToLogin() {
     this.router.navigate(['/login'], {
-      queryParams: { redirect: '/checkout' }
+      queryParams: { redirect: '/checkout' },
     });
   }
 
   async processPayment(orderId: string) {
-  try {
-    const response = await fetch(`${environment.apiUrl}/api/stripe/create-checkout-session`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ orderId }) 
-    });
+    try {
+      const response = await fetch(`${environment.apiUrl}/api/stripe/create-checkout-session`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ orderId }),
+      });
 
-    if (!response.ok) {
-      throw new Error('Error creating payment session');
+      if (!response.ok) {
+        throw new Error('Error creating payment session');
+      }
+
+      const { url } = await response.json();
+      window.location.href = url;
+    } catch (error) {
+      console.error('Payment error:', error);
+      throw error;
     }
-
-    const { url } = await response.json();
-    window.location.href = url;
-  } catch (error) {
-    console.error('Payment error:', error);
-    throw error;
   }
-}
 }

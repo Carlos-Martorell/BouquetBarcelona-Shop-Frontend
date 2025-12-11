@@ -1,4 +1,8 @@
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6" role="list" aria-label="Listado de productos">
+<div
+  class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6"
+  role="list"
+  aria-label="Listado de productos"
+>
   @for (flower of flowers(); track flower._id) {
     <div role="listitem" aria-label="Producto">
       <app-flower-card [flower]="flower" />

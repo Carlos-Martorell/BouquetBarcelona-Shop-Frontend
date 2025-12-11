@@ -1,0 +1,48 @@
+
+<div class="container mx-auto px-4 py-8">
+  
+  <header class="mb-8">
+    <h1 class="text-4xl font-display font-bold text-primary mb-2">
+      Mis pedidos
+    </h1>
+    <p class="text-text/70">
+      Historial de tus pedidos y entregas
+    </p>
+  </header>
+
+  @if (isLoading()) {
+    <div
+      class="flex flex-col text-center justify-center py-20"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label="Cargando ordenes"
+    >
+      <p class="text-2xl text-text/50 mb-8">Cargando ordenes...</p>
+      <app-spinner />
+    </div>
+  }
+
+  @if (!isLoading() && (userOrders().length) === 0) {
+    <div 
+      class="text-center py-20 bg-white rounded-lg border border-border"
+      role="status">
+      <span class="text-6xl mb-4 block" aria-hidden="true">📦</span>
+      <p class="text-2xl text-text/50 mb-6">No tienes pedidos todavía</p>
+      <button 
+        (click)="goToHome()"
+        class="btn btn-primary">
+        Ver catálogo
+      </button>
+    </div>
+  }
+
+  @if (!isLoading() && (userOrders().length) > 0) {
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      @for (order of userOrders(); track order._id) {
+        <app-order-card [order]="order" />
+      }
+    </div>
+  }
+
+</div>

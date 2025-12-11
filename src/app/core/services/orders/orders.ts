@@ -8,24 +8,22 @@ import { environment } from '@env/environments';
   providedIn: 'root',
 })
 export class OrdersService {
-  private http = inject(HttpClient)
+  private http = inject(HttpClient);
   private readonly apiUrl = `${environment.apiUrl}/api/orders`;
-  
+
   private ordersSignal = signal<Order[]>([]);
   readonly orders = this.ordersSignal.asReadonly();
 
   create(order: CreateOrder): Observable<Order> {
     return this.http.post<Order>(this.apiUrl, order).pipe(
-      tap(newOrder => {
-        this.ordersSignal.update(orders => [...orders, newOrder]);
-      })
+      tap((newOrder) => {
+        this.ordersSignal.update((orders) => [...orders, newOrder]);
+      }),
     );
   }
 
   getAll(): Observable<Order[]> {
-    return this.http.get<Order[]>(this.apiUrl).pipe(
-      tap(orders => this.ordersSignal.set(orders))
-    );
+    return this.http.get<Order[]>(this.apiUrl).pipe(tap((orders) => this.ordersSignal.set(orders)));
   }
 
   getOne(id: string): Observable<Order> {

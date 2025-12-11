@@ -1,4 +1,3 @@
-
 export interface Order {
   _id: string;
   customerName: string;
@@ -13,8 +12,8 @@ export interface Order {
   items: OrderItem[];
   total: number;
   status: 'pending' | 'confirmed' | 'delivered' | 'cancelled';
-  deliveryDate: string; 
-  deliveryTime: string; 
+  deliveryDate: string;
+  deliveryTime: string;
   notes?: string;
   createdAt?: string;
   updatedAt?: string;

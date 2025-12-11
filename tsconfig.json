@@ -37,6 +37,9 @@
       "@checkout": [
         "./src/app/checkout/index.ts" 
       ],
+      "@orders": [
+        "./src/app/orders/index.ts" 
+      ],
     }
   },
   "angularCompilerOptions": {

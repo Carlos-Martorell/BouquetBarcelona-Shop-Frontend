@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-success',
   standalone: true,
   imports: [CommonModule, RouterLink],
-  templateUrl: './success.html'
+  templateUrl: './success.html',
 })
 export class Success {
   private router = inject(Router);
@@ -22,7 +22,7 @@ export class Success {
     console.log('Query params:', this.route.snapshot.queryParams);
 
     const sessionId = this.route.snapshot.queryParams['session_id'];
-    
+
     if (sessionId) {
       this.sessionId.set(sessionId);
       console.log('✅ Payment successful, session:', sessionId);

@@ -1,11 +1,18 @@
-<div class="container mx-auto px-4 py-8" role="region" aria-labelledby="catalog-heading" aria-label="Listado de ramos">
+<div
+  class="container mx-auto px-4 py-8"
+  role="region"
+  aria-labelledby="catalog-heading"
+  aria-label="Listado de ramos"
+>
   <header class="mb-8 text-center">
-    <h1 id="catalog-heading" class="text-4xl md:text-5xl font-display font-bold text-primary mb-4">Nuestros Ramos</h1>
+    <h1 id="catalog-heading" class="text-4xl md:text-5xl font-display font-bold text-primary mb-4">
+      Nuestros Ramos
+    </h1>
     <p class="text-xl text-text/70">Flores frescas para cada ocasión especial</p>
   </header>
 
   <div class="max-w-4xl mx-auto mb-8">
-    <app-search-bar 
+    <app-search-bar
       (searchChange)="onSearchChange($event)"
       (categoryChange)="onCategoryChange($event)"
       (occasionChange)="onOccasionChange($event)"
@@ -13,8 +20,13 @@
       aria-label="Barra de búsqueda y filtros"
     />
 
-
-    <div class="mt-4 text-center" role="status" aria-live="polite" aria-atomic="true" aria-label="Contador de resultados">
+    <div
+      class="mt-4 text-center"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label="Contador de resultados"
+    >
       <p class="text-text/70">
         <span class="font-bold text-primary text-lg">{{ filteredFlowers().length }}</span>
         <span class="text-sm">
@@ -25,7 +37,13 @@
   </div>
 
   @if (isLoading()) {
-    <div class="flex flex-col text-center justify-center py-20" role="status" aria-live="polite" aria-atomic="true" aria-label="Cargando productos">
+    <div
+      class="flex flex-col text-center justify-center py-20"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label="Cargando productos"
+    >
       <p class="text-2xl text-text/50 mb-8">Cargando productos...</p>
       <app-spinner />
     </div>
@@ -38,7 +56,13 @@
   }
 
   @if (!isLoading() && flowersService.flowers().length === 0) {
-    <div class="text-center py-20" role="status" aria-live="polite" aria-atomic="true" aria-label="Sin productos disponibles">
+    <div
+      class="text-center py-20"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label="Sin productos disponibles"
+    >
       <p class="text-2xl text-text/50">No hay productos disponibles</p>
     </div>
   }

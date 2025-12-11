@@ -1,28 +1,19 @@
-
 <div class="container mx-auto px-4 py-16">
-  
   <div class="max-w-2xl mx-auto">
-    
-    <div 
+    <div
       class="bg-white rounded-2xl shadow-2xl p-12 text-center border-4 border-success"
       role="status"
-      aria-label="Pago confirmado">
-      
+      aria-label="Pago confirmado"
+    >
       <div class="mb-6">
-        <span 
-          class="text-8xl inline-block animate-bounce" 
-          aria-hidden="true">
-          ✓
-        </span>
+        <span class="text-8xl inline-block animate-bounce" aria-hidden="true"> ✓ </span>
       </div>
 
       <h1 class="text-4xl md:text-5xl font-display font-bold text-success mb-4">
         ¡Pago confirmado!
       </h1>
 
-      <p class="text-xl text-text mb-8">
-        Tu pedido ha sido procesado correctamente
-      </p>
+      <p class="text-xl text-text mb-8">Tu pedido ha sido procesado correctamente</p>
 
       <div class="divider"></div>
 
@@ -42,46 +33,27 @@
       </div>
 
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <button 
-          (click)="goToOrders()"
-          class="btn btn-primary btn-lg"
-          aria-label="Ver mis pedidos">
+        <button (click)="goToOrders()" class="btn btn-primary btn-lg" aria-label="Ver mis pedidos">
           Ver mis pedidos
         </button>
-        <button 
-          (click)="goToHome()"
-          class="btn btn-ghost btn-lg"
-          aria-label="Volver al inicio">
+        <button (click)="goToHome()" class="btn btn-ghost btn-lg" aria-label="Volver al inicio">
           Volver al inicio
         </button>
       </div>
 
       @if (sessionId()) {
-        <p class="text-xs text-text/40 mt-8">
-          ID de sesión: {{ sessionId() }}
-        </p>
+        <p class="text-xs text-text/40 mt-8">ID de sesión: {{ sessionId() }}</p>
       }
-
     </div>
 
     <div class="mt-8 text-center">
-      <p class="text-text/70 mb-4">
-        ¿Tienes alguna pregunta? Contáctanos:
-      </p>
+      <p class="text-text/70 mb-4">¿Tienes alguna pregunta? Contáctanos:</p>
       <div class="flex justify-center gap-6 text-sm">
-        <a 
-          href="mailto:hola@bouquetbarcelona.com" 
-          class="link link-primary">
+        <a href="mailto:hola@bouquetbarcelona.com" class="link link-primary">
           📧 hola&#64;bouquetbarcelona.com
         </a>
-        <a 
-          href="tel:+34612345678" 
-          class="link link-primary">
-          📞 +34 612 345 678
-        </a>
+        <a href="tel:+34612345678" class="link link-primary"> 📞 +34 612 345 678 </a>
       </div>
     </div>
-
   </div>
-
 </div>

@@ -6,7 +6,6 @@ import { Component, output, signal } from '@angular/core';
   templateUrl: './search-bar.html',
 })
 export class SearchBar {
-
   isOpen = signal(false);
   searchValue = signal('');
   categoryValue = signal('all');
@@ -14,12 +13,10 @@ export class SearchBar {
 
   activeFiltersCount = signal(0);
 
-
   searchChange = output<string>();
   categoryChange = output<string>();
   occasionChange = output<string>();
   clearFilters = output<void>();
-
 
   toggleOpen() {
     this.isOpen.update((open) => !open);
