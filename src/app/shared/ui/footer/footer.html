@@ -1,4 +1,4 @@
-<footer class="footer bg-primary text-neutral-content py-10 shadow-lg">
+<!-- <footer class="footer bg-primary text-neutral-content py-10 shadow-lg">
   <div class="container mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8">
     <aside class="col-span-2 md:col-span-1">
       <a routerLink="/" class="text-2xl font-display font-bold mb-3 block"> 🌸 Bouquet </a>
@@ -27,13 +27,13 @@
     <nav>
       <h6 class="footer-title">Síguenos</h6>
       <div class="grid grid-flow-col gap-4">
-        <!-- <a href="https://twitter.com" target="_blank" aria-label="Twitter">
+         <a href="https://twitter.com" target="_blank" aria-label="Twitter">
                     <svg ...>...</svg> </a>
                 <a href="https://youtube.com" target="_blank" aria-label="Youtube">
                     <svg ...>...</svg> </a>
                 <a href="https://facebook.com" target="_blank" aria-label="Facebook">
                     <svg ...>...</svg> </a> -->
-      </div>
+      <!-- </div>
     </nav>
   </div>
 
@@ -41,5 +41,52 @@
     class="footer-center border-t border-neutral-content/20 mt-8 pt-4 text-neutral-content/60 w-full"
   >
     <p>&copy; 2025 Bouquet Barcelona. Todos los derechos reservados.</p>
+  </div>
+</footer> --> 
+<footer class="bg-primary text-neutral-content py-10 shadow-lg">
+  <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-10">
+
+    <!-- Marca -->
+    <aside>
+      <a routerLink="/" class="text-2xl font-display font-bold block mb-4">
+        🌸 Bouquet Barcelona
+      </a>
+      <p class="text-neutral-content/80 leading-relaxed">
+        Ramos frescos diseñados a mano.<br>
+        Entrega en Barcelona ciudad.
+      </p>
+    </aside>
+
+    <!-- Menú -->
+    <nav>
+      <h6 class="footer-title text-neutral-content/90">Explorar</h6>
+      <a routerLink="/catalog" class="link link-hover">Catálogo</a>
+      <a routerLink="/about" class="link link-hover">Sobre nosotros</a>
+      <a routerLink="/contact" class="link link-hover">Contacto</a>
+    </nav>
+
+    <!-- Contacto -->
+    <nav>
+      <h6 class="footer-title text-neutral-content/90">Contacto</h6>
+      <p class="text-neutral-content/80">📍 Barcelona, España</p>
+      <a href="tel:+34612345678" class="link link-hover">📞 +34 612 345 678</a>
+      <a href="mailto:hola@bouquetbarcelona.com" class="link link-hover">
+        📧 hola@bouquetbarcelona.com
+      </a>
+
+      <div class="flex gap-4 mt-4">
+        <a class="hover:text-white">
+          <svg class="w-6 h-6 opacity-80" fill="currentColor"><!-- instagram icon --></svg>
+        </a>
+        <a class="hover:text-white">
+          <svg class="w-6 h-6 opacity-80" fill="currentColor"><!-- pinterest icon --></svg>
+        </a>
+      </div>
+    </nav>
+
+  </div>
+
+  <div class="text-center text-neutral-content/60 mt-8 border-t border-neutral-content/20 pt-4">
+    © 2025 Bouquet Barcelona — hecho con 🌿
   </div>
 </footer>

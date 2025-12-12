@@ -5,25 +5,45 @@
   aria-label="Tarjeta de producto"
 >
   <figure
-    class="relative overflow-hidden aspect-square"
+    class="relative overflow-hidden w-full aspect-square "
     aria-roledescription="carrusel"
     aria-label="Galería de imágenes del producto"
   >
     <div
-      class="carousel carousel-vertical rounded-box h-96"
+      class="carousel carousel-vertical h-full w-full hidden md:block"
       role="group"
       aria-label="Imágenes del producto"
     >
       @for (image of flower().images; track $index) {
-        <div class="carousel-item h-full" role="group" aria-hidden="false">
+        <div class="carousel-item   h-full w-full" role="group" aria-hidden="false">
           <img
             [src]="image"
             [alt]="flower().name"
-            class="w-full h-full object-cover lg:group-hover:scale-102 transition-transform duration-500"
+            class=" object-cover h-full w-full lg:group-hover:scale-102 transition-transform duration-500"
           />
         </div>
       }
-    </div>
+
+</div>
+  <div
+      class="carousel h-full w-full md:hidden"
+      role="group"
+      aria-label="Imágenes del producto"
+    >
+      @for (image of flower().images; track $index) {
+        <div 
+        class="carousel-item   h-full w-full" 
+        role="group" 
+        aria-hidden="false">
+          <img
+            [src]="image"
+            [alt]="flower().name"
+            class=" object-cover h-full w-full"
+          />
+        </div>
+      }
+ </div>
+
   </figure>
 
   <div class="card-body p-4">
@@ -35,7 +55,7 @@
       {{ flower().description }}
     </p>
 
-    <div class="flex flex-wrap gap-2 mt-2" role="list" aria-label="Categoría y colores">
+    <div class="flex flex-wrap gap-2 mt-2 md:min-h-12" role="list" aria-label="Categoría y colores">
       <span
         class="badge badge-sm bg-accent/20 text-accent border-0"
         role="listitem"
