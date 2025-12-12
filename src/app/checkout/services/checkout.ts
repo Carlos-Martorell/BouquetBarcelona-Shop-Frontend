@@ -43,7 +43,6 @@ export class CheckoutService {
 
     return this.ordersService.create(order).pipe(
       tap(() => {
-        this.cartService.clearCart();
         this.notificationService.showSuccess('¡Pedido confirmado!');
       }),
     );
