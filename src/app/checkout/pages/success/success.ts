@@ -13,17 +13,16 @@ import { CartService } from '@cart';
 export class Success {
   private router = inject(Router);
   private route = inject(ActivatedRoute);
-private cartService = inject(CartService)
+  private cartService = inject(CartService);
   sessionId = signal<string | null>(null);
   isLoading = signal(true);
 
   ngOnInit() {
-
     const sessionId = this.route.snapshot.queryParams['session_id'];
 
     if (sessionId) {
       this.sessionId.set(sessionId);
-      this.cartService.clearCart();   
+      this.cartService.clearCart();
     }
 
     this.isLoading.set(false);

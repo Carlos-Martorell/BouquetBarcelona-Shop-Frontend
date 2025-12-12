@@ -43,7 +43,7 @@ import { toast } from 'ngx-sonner'; // 💡 Importa la función toast
 export class NotificationService {
   // Ya no necesitas el signal privado ni el readonly toast
   // private toastSignal = signal<Toast | null>(null);
-  // readonly toast = this.toastSignal.asReadonly(); 
+  // readonly toast = this.toastSignal.asReadonly();
 
   // Los métodos ahora llaman a la función toast de ngx-sonner
   showSuccess(message: string) {
@@ -60,7 +60,7 @@ export class NotificationService {
     // Usa toast.info() de ngx-sonner
     toast.info(message);
   }
-  
+
   // Este método privado ya no es necesario
   /* private show(message: string, type: Toast['type']) {
     this.toastSignal.set({ message, type });

@@ -104,7 +104,6 @@ a,
   }
 }
 
-
 .product-detail {
   animation: fadeInUp 0.4s ease-out;
 }
@@ -119,4 +118,3 @@ a,
     transform: translateY(0);
   }
 }
-

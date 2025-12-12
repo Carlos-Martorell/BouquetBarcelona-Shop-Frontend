@@ -21,18 +21,15 @@ export class OrdersList implements OnInit {
   userOrders = computed(() => {
     const user = this.authService.currentUser();
     if (!user) return [];
-    
+
     const allOrders = this.ordersService.orders();
-    
-    const myOrders = allOrders.filter(order => 
-      order.customerEmail === user.email
-    );
-    
+
+    const myOrders = allOrders.filter((order) => order.customerEmail === user.email);
+
     return myOrders.sort(
-      (a, b) => new Date(a.deliveryDate).getTime() - new Date(b.deliveryDate).getTime()
+      (a, b) => new Date(a.deliveryDate).getTime() - new Date(b.deliveryDate).getTime(),
     );
   });
-
 
   ngOnInit(): void {
     this.loadOrders();
