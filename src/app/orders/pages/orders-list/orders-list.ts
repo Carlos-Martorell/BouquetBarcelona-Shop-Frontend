@@ -20,11 +20,21 @@ export class OrdersList implements OnInit {
 
   isLoading = signal(false)
 
-  userOrders = computed (() => {
-    const user = this.authService.currentUser()
-    if(!user) return [] as Order[]
-    return this.ordersService.orders() || [] as Order[]
-  })
+  userOrders = computed(() => {
+    const user = this.authService.currentUser();
+    if (!user) return [];
+    
+    const allOrders = this.ordersService.orders();
+    
+    const myOrders = allOrders.filter(order => 
+      order.customerEmail === user.email
+    );
+    
+    return myOrders.sort(
+      (a, b) => new Date(a.deliveryDate).getTime() - new Date(b.deliveryDate).getTime()
+    );
+  });
+
 
   ngOnInit(): void {
     this.loadOrders()
