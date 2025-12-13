@@ -31,7 +31,7 @@
     </ul>
 
     <div
-      class="bg-base-200 rounded-lg p-6 border border-border"
+      class="bg-base-200 rounded-lg min-w-xs p-6 border border-border"
       role="region"
       aria-labelledby="order-summary-heading"
     >
@@ -55,7 +55,7 @@
         <button
           type="button"
           (click)="goBack()"
-          class="btn btn-ghost flex-1"
+          class="btn   btn-ghost py-3 flex-1"
           aria-label="Seguir comprando"
         >
           ← Seguir comprando
@@ -63,7 +63,7 @@
         <button
           type="button"
           (click)="onCheckout()"
-          class="btn btn-primary bg-success border-success flex-1"
+          class="btn btn-primary bg-success border-success  flex-1"
           aria-label="Finalizar compra"
           aria-describedby="total-amount"
         >
@@ -74,7 +74,7 @@
       <button
         type="button"
         (click)="onClearCart()"
-        class="btn btn-ghost btn-sm w-full mt-4 text-error"
+        class="btn btn-ghost btn-md w-full mt-4 text-error"
         aria-label="Vaciar carrito"
       >
         Vaciar carrito

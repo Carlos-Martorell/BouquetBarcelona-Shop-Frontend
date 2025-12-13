@@ -10,6 +10,7 @@ body {
   /* overflow-y: scroll;
   overflow-x: auto; */
   overscroll-behavior: none;
+  min-width: 320px
 
 }
 /* * {

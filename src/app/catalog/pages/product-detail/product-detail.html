@@ -35,7 +35,7 @@
         </figure>
 
         <div
-          class="flex gap-2 overflow-x-auto pb-2"
+          class="flex gap-2  pb-2"
           role="list"
           aria-label="Miniaturas de imágenes"
         >
@@ -137,7 +137,22 @@
             <span>Agotado</span>
           </p>
         }
+<div class="divider"></div>
 
+        @if (flower()!.careInstructions) {
+          <div
+            class="bg-success/10 rounded-lg p-6 border border-success/20"
+            role="region"
+            aria-label="Cuidados y conservación"
+          >
+            <h3 class="text-lg font-bold text-success mb-3 flex items-center gap-2">
+              Cuidados y conservación
+            </h3>
+            <p class="text-text leading-relaxed">
+              {{ flower()!.careInstructions }}
+            </p>
+          </div>
+        }
         <div class="divider"></div>
 
         <div class="flex items-center gap-4 mb-6" role="group" aria-label="Controles de cantidad">
@@ -195,22 +210,7 @@
           ← Seguir comprando
         </button>
 
-        <div class="divider"></div>
-
-        @if (flower()!.careInstructions) {
-          <div
-            class="bg-success/10 rounded-lg p-6 border border-success/20"
-            role="region"
-            aria-label="Cuidados y conservación"
-          >
-            <h3 class="text-lg font-bold text-success mb-3 flex items-center gap-2">
-              Cuidados y conservación
-            </h3>
-            <p class="text-text leading-relaxed">
-              {{ flower()!.careInstructions }}
-            </p>
-          </div>
-        }
+        
       </div>
     </div>
   }
