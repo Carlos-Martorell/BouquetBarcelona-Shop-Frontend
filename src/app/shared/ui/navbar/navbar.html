@@ -120,37 +120,43 @@
 
       <div class="dropdown dropdown-end">
         <button
-          tabindex="0"
+          
           role="button"
+          (click)="toggleCart()"
           class="btn btn-ghost btn-circle hover:bg-primary/10"
-          aria-label="Ver carrito"
+          [attr.aria-expanded]="isCartOpen()"
+          aria-label="Ver cesta"
         >
           <div class="indicator">
             <span class="text-3xl" [class.animate-pulse]="totalItemsCount() > 0">
-              <!-- 🛒🧺  -->
               💐</span
             >
-            <span class="badge badge-sm badge-success indicator-item">{{ totalItemsCount() }}</span>
+            <span class="badge badge-sm badge-success indicator-item">
+              {{ totalItemsCount() }}
+            </span>
           </div>
         </button>
-
+@if (isCartOpen()) {
         <div
-          tabindex="0"
+          
           class="mt-6 z-1 card card-compact dropdown-content w-64 bg-white shadow-xl border border-border"
         >
           <div class="card-body">
-            <span class="font-bold text-lg text-text">{{ totalItemsCount() }} productos</span>
+            <span class="font-bold text-lg text-text">
+            {{ totalItemsCount() }} producto{{ totalItemsCount() !== 1 ? 's' : '' }} 
+            </span>
             <span class="text-secondary">Total: {{ cartTotal() | currency: 'EUR' }} </span>
             <div class="card-actions mt-2">
-              <a
-                routerLink="/cart"
+              <button
+                (click)="goToCart()"
                 class="btn btn-secondary bg-accent hover:bg-success hover:border-success hover:text-background btn-block"
               >
                 Ver carrito
-              </a>
+              </button>
             </div>
           </div>
         </div>
+      }
       </div>
     </div>
   </div>
