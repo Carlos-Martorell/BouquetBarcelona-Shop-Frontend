@@ -6,11 +6,12 @@
   @if (cartService.cartItems().length === 0) {
     <div class="text-center py-10" role="status" aria-live="polite" aria-atomic="true">
       <div class="flex justify-center mb-4">
-      <app-basket-icon />
-    </div>
+        <app-basket-icon />
+      </div>
+
       <!-- <span class="text-6xl mb-4 block" aria-hidden="true"><app-basket-icon  />🛒</span> -->
       <p class="text-2xl text-text/50 mb-6">Tu cesta está vacía</p>
-      
+
       <button type="button" (click)="goBack()" class="btn btn-primary" aria-label="Ver productos">
         Ver productos
       </button>
@@ -55,7 +56,7 @@
         <button
           type="button"
           (click)="goBack()"
-          class="btn   btn-ghost py-3 flex-1"
+          class="btn btn-ghost py-3 flex-1"
           aria-label="Seguir comprando"
         >
           ← Seguir comprando
@@ -63,7 +64,7 @@
         <button
           type="button"
           (click)="onCheckout()"
-          class="btn btn-primary bg-success border-success  flex-1"
+          class="btn btn-primary bg-success border-success flex-1"
           aria-label="Finalizar compra"
           aria-describedby="total-amount"
         >

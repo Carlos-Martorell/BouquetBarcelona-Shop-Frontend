@@ -4,8 +4,5 @@ import { Component } from '@angular/core';
   selector: 'app-basket-icon',
   imports: [],
   templateUrl: './basket-icon.html',
-  styleUrl: './basket-icon.css',
 })
-export class BasketIcon {
-
-}
+export class BasketIcon {}

@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CartService, CartItemComponent } from '@cart';
 import { Router } from '@angular/router';
 import { CurrencyPipe } from '@angular/common';
-import { BasketIcon } from "@shared";
+import { BasketIcon } from '@shared';
 
 @Component({
   selector: 'app-cart',

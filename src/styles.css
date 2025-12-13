@@ -10,13 +10,11 @@ body {
   /* overflow-y: scroll;
   overflow-x: auto; */
   overscroll-behavior: none;
-  min-width: 320px
-
+  min-width: 320px;
 }
 /* * {
   outline: 1px solid red !important;
 } */
-
 
 /* body {
   font-family: 'Montserrat', sans-serif;
@@ -58,7 +56,6 @@ small,
   font-weight: 400;
   opacity: 0.8;
 }
-
 
 [data-theme='bouquet'] {
   --p: 28 32 24; /* primary: #744c3e (chocolate) */

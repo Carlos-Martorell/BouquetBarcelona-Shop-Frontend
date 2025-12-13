@@ -1,4 +1,3 @@
-<!-- register.html -->
 <main
   class="min-h-screen flex items-center justify-center bg-background p-4"
   role="main"
@@ -11,7 +10,7 @@
           routerLink="/"
           class="text-4xl font-display font-bold whitespace-nowrap text-accent hover:text-success/70 transition-colors ml-2 md:ml-0"
         >
-          🌸 Bouquet Barcelona
+          Bouquet Barcelona
         </a>
       </div>
       <h1 class="text-3xl font-bold text-primary mb-2" id="register-heading">Crear cuenta</h1>
@@ -24,7 +23,6 @@
       class="bg-white rounded-lg shadow-xl p-8 border border-border"
       aria-labelledby="register-heading"
     >
-      <!-- Name -->
       <div class="mb-2">
         <label for="name" class="block text-text font-medium mb-2"> Nombre completo </label>
         <input
@@ -49,8 +47,7 @@
         }
       </div>
 
-      <!-- Email -->
-      <div class="mb-6">
+      <div class="mb-2">
         <label for="email" class="block text-text font-medium mb-2"> Email </label>
         <input
           id="email"
@@ -74,8 +71,7 @@
         }
       </div>
 
-      <!-- Phone (opcional) -->
-      <div class="mb-6">
+      <div class="mb-2">
         <label for="phone" class="block text-text font-medium mb-2"> Teléfono (opcional) </label>
         <input
           id="phone"
@@ -86,8 +82,7 @@
         />
       </div>
 
-      <!-- Password -->
-      <div class="mb-6">
+      <div class="mb-2">
         <label for="password" class="block text-text font-medium mb-2"> Contraseña </label>
         <input
           id="password"
@@ -111,7 +106,6 @@
         }
       </div>
 
-      <!-- Confirm Password -->
       <div class="mb-6">
         <label for="confirmPassword" class="block text-text font-medium mb-2">
           Confirmar contraseña
@@ -135,14 +129,12 @@
         }
       </div>
 
-      <!-- Error global (opcional) -->
       @if (errorMessage()) {
         <div role="alert" class="mb-4 p-3 bg-error/10 border border-error text-error rounded-lg">
           {{ errorMessage() }}
         </div>
       }
 
-      <!-- Submit -->
       <button type="submit" [disabled]="loading()" class="w-full btn-primary text-lg">
         @if (loading()) {
           ⏳ Creando cuenta...
@@ -151,7 +143,6 @@
         }
       </button>
 
-      <!-- Link a login -->
       <div class="mt-6 text-center">
         <p class="text-text/70">
           ¿Ya tienes cuenta?

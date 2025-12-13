@@ -34,11 +34,7 @@
           />
         </figure>
 
-        <div
-          class="flex gap-2  pb-2"
-          role="list"
-          aria-label="Miniaturas de imágenes"
-        >
+        <div class="flex gap-2 pb-2" role="list" aria-label="Miniaturas de imágenes">
           @for (image of flower()!.images; track $index) {
             <button
               (click)="selectImage($index)"
@@ -92,13 +88,13 @@
         </p>
 
         <div class="flex flex-wrap gap-2 mb-6" role="list" aria-label="Etiquetas del producto">
-          <span class="badge badge-lg bg-accent/20 text-accent" role="listitem">{{
+          <span class="badge badge-lg bg-accent/60 text-text" role="listitem">{{
             flower()!.category | titlecase
           }}</span>
-          <span class="badge badge-lg bg-secondary/20 text-secondary" role="listitem">{{
+          <span class="badge badge-lg bg-secondary/20 text-text" role="listitem">{{
             flower()!.occasion | titlecase
           }}</span>
-          <span class="badge badge-lg bg-primary/20 text-primary" role="listitem">{{
+          <span class="badge badge-lg bg-success/70 text-text" role="listitem">{{
             flower()!.size | titlecase
           }}</span>
         </div>
@@ -107,7 +103,7 @@
           <h3 class="text-sm font-semibold text-text mb-2">Colores:</h3>
           <div class="flex flex-wrap gap-2" role="list" aria-label="Colores disponibles">
             @for (color of flower()!.colors; track color) {
-              <span class="badge badge-lg bg-secondary/20 text-secondary" role="listitem">
+              <span class="badge badge-lg bg-secondary/50 text-text" role="listitem">
                 {{ color }}
               </span>
             }
@@ -137,7 +133,7 @@
             <span>Agotado</span>
           </p>
         }
-<div class="divider"></div>
+        <div class="divider"></div>
 
         @if (flower()!.careInstructions) {
           <div
@@ -209,8 +205,6 @@
         >
           ← Seguir comprando
         </button>
-
-        
       </div>
     </div>
   }
