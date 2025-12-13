@@ -5,7 +5,7 @@
   aria-label="Tarjeta de producto"
 >
   <figure
-    class="relative overflow-hidden w-full aspect-square "
+    class="relative overflow-hidden w-full aspect-square"
     aria-roledescription="carrusel"
     aria-label="Galería de imágenes del producto"
   >
@@ -15,35 +15,22 @@
       aria-label="Imágenes del producto"
     >
       @for (image of flower().images; track $index) {
-        <div class="carousel-item   h-full w-full" role="group" aria-hidden="false">
+        <div class="carousel-item h-full w-full" role="group" aria-hidden="false">
           <img
             [src]="image"
             [alt]="flower().name"
-            class=" object-cover h-full w-full lg:group-hover:scale-102 transition-transform duration-500"
+            class="object-cover h-full w-full lg:group-hover:scale-102 transition-transform duration-500"
           />
         </div>
       }
-
-</div>
-  <div
-      class="carousel h-full w-full md:hidden"
-      role="group"
-      aria-label="Imágenes del producto"
-    >
+    </div>
+    <div class="carousel h-full w-full md:hidden" role="group" aria-label="Imágenes del producto">
       @for (image of flower().images; track $index) {
-        <div 
-        class="carousel-item   h-full w-full" 
-        role="group" 
-        aria-hidden="false">
-          <img
-            [src]="image"
-            [alt]="flower().name"
-            class=" object-cover h-full w-full"
-          />
+        <div class="carousel-item h-full w-full" role="group" aria-hidden="false">
+          <img [src]="image" [alt]="flower().name" class="object-cover h-full w-full" />
         </div>
       }
- </div>
-
+    </div>
   </figure>
 
   <div class="card-body p-4">

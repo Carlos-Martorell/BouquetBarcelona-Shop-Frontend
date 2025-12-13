@@ -34,12 +34,17 @@
       <span class="font-semibold">{{ cartService.cartTotal() | currency: 'EUR' }}</span>
     </div>
     <div class="flex justify-between text-success">
-      <span>Envío:</span>
+      <span class="mt-2">Envío: </span>
+      
       <span class="font-semibold flex items-center gap-1">
-        <span aria-hidden="true">🌿🚲</span>
+        <span aria-hidden="true">
+           <app-bikes-icon [size]="45 " [color]="'currentColor'" />
+        </span>
         Gratis
       </span>
+      
     </div>
+   
   </div>
 
   <div class="divider"></div>
