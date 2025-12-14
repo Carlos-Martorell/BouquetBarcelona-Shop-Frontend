@@ -1,4 +1,4 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive, Router } from '@angular/router';
 import { CartService } from '@cart';
 import { AuthService } from '@auth';
@@ -14,6 +14,7 @@ export class Navbar {
   authService = inject(AuthService);
   cartService = inject(CartService);
   router = inject(Router);
+  isCartOpen = signal(false)
 
   totalItemsCount = computed(() => this.cartService.totalItemsCount());
   cartTotal = computed(() => this.cartService.cartTotal());
@@ -21,5 +22,14 @@ export class Navbar {
   onLogout() {
     this.authService.logout();
     this.router.navigate(['/']);
+  }
+
+    toggleCart() {
+    this.isCartOpen.update(value => !value);
+  }
+
+    goToCart() {
+    this.isCartOpen.set(false);
+    this.router.navigate(['/cart']); 
   }
 }

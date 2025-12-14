@@ -2,13 +2,13 @@ import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Flower, FlowersService } from '@catalog';
 import { CartService } from '@cart';
-import { NotificationService } from '@shared';
+import { NotificationService, BasketIcon } from '@shared';
 import { TitleCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-product-detail',
   standalone: true,
-  imports: [RouterLink, TitleCasePipe],
+  imports: [RouterLink, TitleCasePipe, BasketIcon],
   templateUrl: './product-detail.html',
 })
 export class ProductDetail {

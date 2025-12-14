@@ -1,11 +1,11 @@
 import { Component, input } from '@angular/core';
 
 @Component({
-  selector: 'app-basket-icon',
+  selector: 'app-trash-icon',
   standalone: true,
-  templateUrl: './basket-icon.html'
+  templateUrl: './trash-icon.html'
 })
-export class BasketIcon {
+export class TrashIcon {
   size = input<number>(16);
   color = input<string>('currentColor');
 }
