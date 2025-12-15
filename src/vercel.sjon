@@ -1,5 +1,5 @@
 {
-  "buildCommand": "npm run build",
+  "buildCommand": "node setenv.js && npm run build",
   "outputDirectory": "dist/bouquet-shop/browser",
   "framework": null,
   "rewrites": [
