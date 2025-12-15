@@ -125,7 +125,7 @@ Premium flower e-commerce web application built with Angular 20 Signals, Screami
 - Proper semantic HTML with `role`, `aria-label`, `aria-live` attributes
 - Full keyboard navigation support
 - Screen reader optimized
-- WCAG 2.1 AA compliance
+
 
 ## Tech Stack
 
@@ -163,11 +163,13 @@ Premium flower e-commerce web application built with Angular 20 Signals, Screami
 ```
 src/app/
 ├── auth/                    # JWT Authentication Module
+│   ├── models/
+│   │   └── user.ts 
 │   ├── guards/
-│   │   ├── auth.guard.ts           # Route protection (requires login)
-│   │   └── guest.guard.ts          # Redirect authenticated users
+│   │   ├── auth-guard.ts           # Route protection (requires login)
+│   │   └── guest-guard.ts          # Redirect authenticated users
 │   ├── services/
-│   │   ├── auth.service.ts         # Login, register, logout logic
+│   │   ├── auth.ts         # Login, register, logout logic
 │   │   └── auth.interceptor.ts     # Automatic JWT token injection
 │   ├── pages/
 │   │   ├── login/                  # Login page component
@@ -176,9 +178,9 @@ src/app/
 │
 ├── catalog/                 # Product Catalog Module
 │   ├── models/
-│   │   └── flower.model.ts         # Flower interface definitions
+│   │   └── flower.ts         # Flower interface definitions
 │   ├── services/
-│   │   └── flowers.service.ts      # CRUD operations with signals
+│   │   └── flowers.ts      # CRUD operations with signals
 │   ├── components/
 │   │   ├── flower-card/            # Individual product card (dumb)
 │   │   ├── product-grid/           # Grid layout component (dumb)
@@ -190,21 +192,20 @@ src/app/
 │
 ├── cart/                    # Shopping Cart Module
 │   ├── models/
-│   │   └── cart-item.model.ts      # Cart item interface
+│   │   └── cart-item.ts      # Cart item interface
 │   ├── services/
-│   │   └── cart.service.ts         # Cart state with signals
+│   │   └── cart.ts         # Cart state with signals
 │   ├── components/
-│   │   ├── cart-item/              # Single cart item (dumb)
-│   │   └── cart-summary/           # Cart totals (dumb)
+│   │   └── cart-item/              # Single cart item (dumb)
 │   ├── page/
 │   │   └── cart/                   # Cart page (smart)
 │   └── index.ts
 │
 ├── checkout/                # Payment Flow Module
 │   ├── models/
-│   │   └── checkout-data.model.ts  # Checkout form interface
+│   │   └── checkout-data.ts  # Checkout form interface
 │   ├── services/
-│   │   └── checkout.service.ts     # Order creation and Stripe
+│   │   └── checkout.ts     # Order creation and Stripe
 │   ├── components/
 │   │   ├── delivery-form/          # Checkout form (dumb)
 │   │   └── order-summary/          # Order review (dumb)
@@ -224,18 +225,22 @@ src/app/
 │   ├── ui/
 │   │   ├── navbar/                 # Main navigation bar
 │   │   ├── footer/                 # Site footer
-│   │   └── spinner/                # Loading spinner
+│   │   ├── spinner/                # Loading spinner
+│   │   └── icons/                  # SVG icon components
+│   │       ├── basket-icon/        # Shopping basket icon
+│   │       ├── bikes-icon/         # Delivery bike icon
+│   │       ├── trash-icon/         # Delete/remove icon
+│   │       ├── bouquet-icon/       # Flower bouquet icon
+│   │       └── empty-basket-icon/  # Empty cart state icon
 │   └── services/
 │       └── notification/           # Toast notification service
 │
 ├── core/                    # Core/Global Services
 │   ├── models/
 │   │   └── order.ts                # Order interfaces
-│   ├── services/
-│   │   ├── orders/                 # Shared order service
-│   │   └── geocoding/              # Mapbox API integration
-│   └── guards/
-│       └── (imported from auth/)
+│   └── services/
+│       ├── orders/                 # Shared order service
+│       └── geocoding/              # Mapbox API integration
 │
 ├── layouts/
 │   └── main-layout/                # Main application layout
@@ -257,8 +262,7 @@ src/app/
 
 ### Clone Repository
 ```bash
-git clone https://github.com/Carlos-Martorell/bouquet-shop.git
-cd bouquet-shop
+git clone https://github.com/Carlos-Martorell/BouquetBarcelona-Shop-Frontend
 ```
 
 ### Install Dependencies
@@ -272,7 +276,7 @@ Create `src/environments/environment.ts`:
 ```typescript
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:3000',
+  apiUrl: 'https://bouquetbarcelona-backend.onrender.com',
   mapboxKey: 'pk.eyJ1Ijo...' // Obtain from mapbox.com
 };
 ```
@@ -305,34 +309,27 @@ Navigate to `http://localhost:4200`
 | `npm run build` | Build for production |
 | `npm test` | Run unit tests |
 | `npm run format` | Format code with Prettier |
-| `npm run format:check` | Verify code formatting |
 
 ## Testing
 
 ### Testing Strategy
 
-**Implemented test suites:**
-- **AuthService** (50 tests): Login, register, logout, token persistence, guards
-- **CartService** (15 tests): CRUD operations, localStorage persistence, computed signals
-- **FlowerCard** (8 tests): Component rendering, event emissions, navigation
-- **OrderCard** (10 tests): Status display, formatting, badge rendering
+This project focuses on testing the most critical parts of the application's state management and business logic. The test suite covers:
 
-**Total Test Count:** ~83 tests  
-**Code Coverage:** ~50% of critical application paths
+**Implemented test suites:**
+- **AuthService** (9 tests): Login, register, logout, token persistence, user loading, admin role verification
+- **CartService** (9 tests): CRUD operations, localStorage persistence, quantity updates, total calculations
+- **FlowerCard** (6 tests): Component rendering, display of name/price/image/badges
+
+**Total Test Count:** 24 tests  
+**Focus Areas:** Core authentication flow and shopping cart state management - the two most critical user-facing features
 
 ### Execute Tests
 ```bash
 # Run all tests
 npm test
 
-# Run specific test file
-npm test -- --include='**/cart.service.spec.ts'
 
-# Generate coverage report
-npm test -- --code-coverage
-
-# Watch mode for development
-npm test -- --watch
 ```
 
 ### Signal Testing Example
@@ -881,25 +878,6 @@ addToCart(flower: Flower) {
 }
 ```
 
-### Testing Signals with fakeAsync
-```typescript
-// ✅ Correct (waits for effect execution)
-it('should save to localStorage', fakeAsync(() => {
-  service.addToCart(flower, 1);
-  tick(); // Executes pending effect()
-  
-  const stored = localStorage.getItem('cart');
-  expect(stored).toBeTruthy();
-}));
-
-// ❌ Incorrect (effect hasn't executed yet)
-it('should save to localStorage', () => {
-  service.addToCart(flower, 1);
-  
-  const stored = localStorage.getItem('cart');
-  expect(stored).toBeTruthy(); // Test fails
-});
-```
 
 ## Roadmap
 
@@ -930,13 +908,9 @@ Contributions are welcome and appreciated! Please follow these guidelines:
 
 - Follow official Angular Style Guide
 - Use Prettier for code formatting (`npm run format`)
-- Write unit tests for new features (maintain >50% coverage)
 - Update documentation for API changes
 - Use conventional commit messages
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for complete details.
 
 ## Author
 
