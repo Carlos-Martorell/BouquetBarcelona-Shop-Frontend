@@ -3,7 +3,7 @@ import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CartService } from '@cart';
-import { BouquetIcon, BikesIcon } from "@shared";
+import { BouquetIcon, BikesIcon } from '@shared';
 
 @Component({
   selector: 'app-success',

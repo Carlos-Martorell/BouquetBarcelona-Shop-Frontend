@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { BikesIcon } from "../icons/bikes-icon/bikes-icon";
-
+import { BikesIcon } from '../icons/bikes-icon/bikes-icon';
 
 @Component({
   selector: 'app-footer',

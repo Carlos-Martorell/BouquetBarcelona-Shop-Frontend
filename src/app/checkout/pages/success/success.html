@@ -1,29 +1,20 @@
-
 <div class="container mx-auto px-4 py-4">
   <div class="max-w-2xl mx-auto">
-    
     <div
       class="bg-linear-to-br from-success/20 via-accent/5 to-primary/20 rounded-2xl shadow-2xl p-8 text-center border-2 border-success/30"
       role="status"
-      aria-label="Pago confirmado">
-      
-      <div class=" inline-block">
-        <app-bouquet-icon 
-          [size]="100" 
-          class="animate-bounce"
-        />
+      aria-label="Pago confirmado"
+    >
+      <div class="inline-block">
+        <app-bouquet-icon [size]="100" class="animate-bounce" />
       </div>
 
       <h1 class="text-4xl md:text-5xl font-display font-bold text-success mb-4">
         ¡Pedido confirmado!
       </h1>
 
-      <p class="text-xl text-text/70 mb-2">
-        Tu ramo está en buenas manos
-      </p>
-      <p class="text-lg text-text/60 mb-2">
-        Gracias por confiar en nosotros
-      </p>
+      <p class="text-xl text-text/70 mb-2">Tu ramo está en buenas manos</p>
+      <p class="text-lg text-text/60 mb-2">Gracias por confiar en nosotros</p>
 
       <div class="divider"></div>
 
@@ -45,35 +36,33 @@
       </div>
 
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <button 
-          (click)="goToOrders()" 
-          class="btn btn-primary hover:bg-success hover:border-none btn-lg gap-2">
+        <button
+          (click)="goToOrders()"
+          class="btn btn-primary hover:bg-success hover:border-none btn-lg gap-2"
+        >
           <span>Ver mis pedidos</span>
         </button>
-        <button 
-          (click)="goToHome()" 
-          class="btn btn-outline btn-lg gap-2">
+        <button (click)="goToHome()" class="btn btn-outline btn-lg gap-2">
           <span>Seguir comprando</span>
         </button>
       </div>
-
     </div>
 
     <div class="mt-8 text-center">
-      <p class="text-text/60 mb-4 text-sm">
-        ¿Necesitas ayuda con tu pedido?
-      </p>
+      <p class="text-text/60 mb-4 text-sm">¿Necesitas ayuda con tu pedido?</p>
       <div class="flex flex-col sm:flex-row justify-center gap-4 text-sm">
-        <a 
-          href="mailto:hola@bouquetbarcelona.com" 
-          class="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors">
+        <a
+          href="mailto:hola@bouquetbarcelona.com"
+          class="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
+        >
           <span aria-hidden="true">📧</span>
           <span>hola&#64;bouquetbarcelona.com</span>
         </a>
         <span class="hidden sm:inline text-text/30">•</span>
-        <a 
-          href="tel:+34612345678" 
-          class="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors">
+        <a
+          href="tel:+34612345678"
+          class="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
+        >
           <span aria-hidden="true">📞</span>
           <span>+34 612 345 678</span>
         </a>

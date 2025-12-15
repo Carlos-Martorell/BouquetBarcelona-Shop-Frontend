@@ -2,6 +2,7 @@ export * from './ui/navbar/navbar';
 export * from './ui/footer/footer';
 export * from './ui/spinner/spinner';
 export * from './ui/icons/basket-icon/basket-icon';
+export * from './ui/icons/empty-basket-icon/empty-basket-icon';
 export * from './ui/icons/bikes-icon/bikes-icon';
 export * from './ui/icons/bouquet-icon/bouquet-icon';
 export * from './ui/icons/trash-icon/trash-icon';
