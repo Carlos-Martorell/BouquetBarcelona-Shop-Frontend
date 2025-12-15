@@ -8,7 +8,6 @@ import { EmptyBasketIcon } from '@shared';
   selector: 'app-cart',
   imports: [CartItemComponent, CurrencyPipe, EmptyBasketIcon],
   templateUrl: './cart.html',
-  styleUrl: './cart.css',
 })
 export class Cart {
   onQuantityChange(data: { flowerId: string; quantity: number }) {

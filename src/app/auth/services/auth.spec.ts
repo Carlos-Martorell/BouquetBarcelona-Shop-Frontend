@@ -2,7 +2,7 @@ import { HttpTestingController, provideHttpClientTesting } from '@angular/common
 import { provideHttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
-import { environment } from '@env/environments';
+import { environment } from '@env/environment';
 import { AuthService } from '@auth';
 
 describe('AuthService', () => {

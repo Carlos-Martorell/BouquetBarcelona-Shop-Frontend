@@ -7,7 +7,6 @@ import { BikesIcon } from '@shared/index';
   selector: 'app-order-summary',
   imports: [CurrencyPipe, BikesIcon],
   templateUrl: './order-summary.html',
-  styleUrl: './order-summary.css',
 })
 export class OrderSummary {
   cartService = inject(CartService);

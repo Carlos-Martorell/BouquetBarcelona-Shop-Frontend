@@ -8,7 +8,7 @@ import { BouquetIcon, BikesIcon } from '@shared';
 @Component({
   selector: 'app-success',
   standalone: true,
-  imports: [CommonModule, RouterLink, BouquetIcon, BikesIcon],
+  imports: [CommonModule, BouquetIcon, BikesIcon],
   templateUrl: './success.html',
 })
 export class Success {

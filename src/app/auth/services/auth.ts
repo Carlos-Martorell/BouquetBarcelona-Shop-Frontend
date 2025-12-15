@@ -3,7 +3,7 @@ import { computed, inject, Injectable, PLATFORM_ID, signal } from '@angular/core
 import { Router } from '@angular/router';
 import { LoginResponse, RegisterData, User } from '@auth';
 import { switchMap, tap } from 'rxjs/operators';
-import { environment } from '@env/environments';
+import { environment } from '@env/environment';
 import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
