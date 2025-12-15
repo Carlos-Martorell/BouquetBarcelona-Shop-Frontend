@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { environment } from '@env/environments';
+import { environment } from '@env/environment';
 
 export interface AddressSuggestion {
   id: string;

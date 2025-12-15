@@ -1,7 +1,7 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '@env/environments';
+import { environment } from '@env/environment';
 import { Order, CreateOrder } from '@core';
 
 @Injectable({

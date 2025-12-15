@@ -5,7 +5,7 @@ import { NotificationService } from '@shared';
 import { CreateOrder, OrderItem, OrdersService } from '@core';
 import { CheckoutData } from '@checkout';
 import { tap } from 'rxjs';
-import { environment } from '@env/environments';
+import { environment } from '@env/environment';
 
 @Injectable({
   providedIn: 'root',

@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "node setenv.js && ng serve",
-    "build": "ng build",
+    "build": "node setenv.js && ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:bouquet-shop": "node dist/bouquet-shop/server/server.mjs",

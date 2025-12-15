@@ -10,7 +10,6 @@ import { CartService } from '@cart';
   selector: 'app-checkout',
   imports: [DeliveryForm, OrderSummary],
   templateUrl: './checkout.html',
-  styleUrl: './checkout.css',
 })
 export class Checkout {
   private router = inject(Router);

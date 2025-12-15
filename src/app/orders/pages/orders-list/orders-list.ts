@@ -9,7 +9,6 @@ import { OrderCard } from '@orders';
   selector: 'app-orders-list',
   imports: [Spinner, OrderCard],
   templateUrl: './orders-list.html',
-  styleUrl: './orders-list.css',
 })
 export class OrdersList implements OnInit {
   private router = inject(Router);
