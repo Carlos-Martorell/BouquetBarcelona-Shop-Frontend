@@ -4,8 +4,8 @@ import { Component, input } from '@angular/core';
   selector: 'app-bouquet-icon',
   standalone: true,
   templateUrl: './bouquet-icon.html',
-  styleUrl: './bouquet-icon.css'
+  styleUrl: './bouquet-icon.css',
 })
 export class BouquetIcon {
-  size = input<number>(128); 
+  size = input<number>(128);
 }

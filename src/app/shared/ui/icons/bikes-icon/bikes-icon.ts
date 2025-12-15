@@ -6,6 +6,6 @@ import { Component, input } from '@angular/core';
   templateUrl: './bikes-icon.html',
 })
 export class BikesIcon {
-    size = input<number>(24); 
+  size = input<number>(24);
   color = input<string>('#277c3c');
 }

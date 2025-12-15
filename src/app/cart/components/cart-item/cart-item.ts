@@ -1,7 +1,7 @@
 import { CurrencyPipe } from '@angular/common';
 import { Component, input, output } from '@angular/core';
 import { CartItem } from '@cart';
-import { TrashIcon } from "@shared";
+import { TrashIcon } from '@shared';
 
 @Component({
   selector: 'app-cart-item',

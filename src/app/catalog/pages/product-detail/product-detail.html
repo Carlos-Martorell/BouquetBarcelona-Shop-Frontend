@@ -187,16 +187,14 @@
         <button
           (click)="addToCart()"
           [disabled]="flower()!.stock === 0"
-          class=" btn-primary h-12 btn-lg w-full mb-4 shadow-lg"
+          class="btn-primary h-12 btn-lg w-full mb-4 shadow-lg"
           aria-label="Añadir al carrito"
           aria-describedby="product-price product-quantity"
         >
           <span class="text-xl mr-2">
             <app-basket-icon [size]="20" color="currentColor" />
           </span>
-          <span class="text-xl align-middle mr-2 mb-2">
-          Añadir a la cesta
-          </span>
+          <span class="text-xl align-middle mr-2 mb-2"> Añadir a la cesta </span>
           @if (quantity() > 1) {
             <span>({{ quantity() }} unidades)</span>
           }

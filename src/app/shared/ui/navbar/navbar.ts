@@ -14,7 +14,7 @@ export class Navbar {
   authService = inject(AuthService);
   cartService = inject(CartService);
   router = inject(Router);
-  isCartOpen = signal(false)
+  isCartOpen = signal(false);
 
   totalItemsCount = computed(() => this.cartService.totalItemsCount());
   cartTotal = computed(() => this.cartService.cartTotal());
@@ -24,12 +24,12 @@ export class Navbar {
     this.router.navigate(['/']);
   }
 
-    toggleCart() {
-    this.isCartOpen.update(value => !value);
+  toggleCart() {
+    this.isCartOpen.update((value) => !value);
   }
 
-    goToCart() {
+  goToCart() {
     this.isCartOpen.set(false);
-    this.router.navigate(['/cart']); 
+    this.router.navigate(['/cart']);
   }
 }

@@ -1,7 +1,7 @@
 import { CurrencyPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { CartService } from '@cart';
-import { BikesIcon } from "@shared/index";
+import { BikesIcon } from '@shared/index';
 
 @Component({
   selector: 'app-order-summary',
