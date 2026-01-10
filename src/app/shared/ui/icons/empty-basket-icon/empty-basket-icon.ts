@@ -6,5 +6,5 @@ import { Component, input } from '@angular/core';
   templateUrl: './empty-basket-icon.html',
 })
 export class EmptyBasketIcon {
- size = input<number>(128)
+  size = input<number>(128);
 }

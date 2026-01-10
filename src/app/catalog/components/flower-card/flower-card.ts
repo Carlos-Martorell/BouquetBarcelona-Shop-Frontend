@@ -9,5 +9,4 @@ import { Flower } from '@catalog';
 })
 export class FlowerCard {
   flower = input.required<Flower>();
-
 }

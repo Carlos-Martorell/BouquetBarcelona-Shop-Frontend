@@ -22,7 +22,7 @@ export class CartItemComponent {
       quantity: newQuantity,
     });
   }
-
+  //
   decrement() {
     const newQuantity = this.item().quantity - 1;
     if (newQuantity > 0) {

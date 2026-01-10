@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, ElementRef, inject, signal, ViewChild } from '@angular/core';
 import { RouterLink, RouterLinkActive, Router } from '@angular/router';
 import { CartService } from '@cart';
 import { AuthService } from '@auth';
@@ -16,6 +16,8 @@ export class Navbar {
   router = inject(Router);
   isCartOpen = signal(false);
 
+  @ViewChild('cartModal') cartModal!: ElementRef<HTMLDialogElement>;
+
   totalItemsCount = computed(() => this.cartService.totalItemsCount());
   cartTotal = computed(() => this.cartService.cartTotal());
 
@@ -24,12 +26,12 @@ export class Navbar {
     this.router.navigate(['/']);
   }
 
-  toggleCart() {
-    this.isCartOpen.update((value) => !value);
+  openCartModal() {
+    this.cartModal?.nativeElement.showModal();
   }
 
   goToCart() {
-    this.isCartOpen.set(false);
+    this.cartModal?.nativeElement.close();
     this.router.navigate(['/cart']);
   }
 }

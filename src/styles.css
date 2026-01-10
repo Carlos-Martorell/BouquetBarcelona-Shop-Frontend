@@ -12,6 +12,10 @@ body {
   overscroll-behavior: none;
   min-width: 320px;
 }
+
+html {
+  scrollbar-gutter: stable;
+}
 /* * {
   outline: 1px solid red !important;
 } */

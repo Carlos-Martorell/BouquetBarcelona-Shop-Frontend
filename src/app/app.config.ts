@@ -12,12 +12,13 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes,
+    provideRouter(
+      routes,
       withViewTransitions(),
-      withInMemoryScrolling({  
+      withInMemoryScrolling({
         scrollPositionRestoration: 'top',
-        anchorScrolling: 'enabled' 
-        })
+        anchorScrolling: 'enabled',
+      }),
     ),
     provideHttpClient(withFetch(), withInterceptors([authInterceptor])),
   ],
