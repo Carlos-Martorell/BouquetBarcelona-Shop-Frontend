@@ -44,15 +44,46 @@ export class CartService {
     }
   }
 
-  addToCart(flower: Flower, quantity: number) {
+  // addToCart(flower: Flower, quantity: number) {
+  //   const items = [...this.cartItems()];
+  //   const existingIndex = items.findIndex((item) => flower._id === item.flower._id);
+  //   if (existingIndex >= 0) {
+  //     items[existingIndex].quantity += quantity;
+  //   } else {
+  //     items.push({ flower, quantity });
+  //   }
+  //   this.cartItemsSignal.set(items);
+  // }
+
+  addToCart(flower: Flower, quantity: number): { success: boolean; message?: string } {
+    // Validar stock disponible
+    if (quantity > flower.stock) {
+      return {
+        success: false,
+        message: `Solo hay ${flower.stock} unidades disponibles`,
+      };
+    }
+
     const items = [...this.cartItems()];
     const existingIndex = items.findIndex((item) => flower._id === item.flower._id);
+
     if (existingIndex >= 0) {
-      items[existingIndex].quantity += quantity;
+      const newQuantity = items[existingIndex].quantity + quantity;
+
+      if (newQuantity > flower.stock) {
+        return {
+          success: false,
+          message: `Solo puedes añadir ${flower.stock - items[existingIndex].quantity} unidades más`,
+        };
+      }
+
+      items[existingIndex].quantity = newQuantity;
     } else {
       items.push({ flower, quantity });
     }
+
     this.cartItemsSignal.set(items);
+    return { success: true };
   }
 
   removeFromCart(id: string) {
@@ -60,11 +91,32 @@ export class CartService {
     this.cartItemsSignal.set(items);
   }
 
-  updateQuantity(id: string, quantity: number) {
+  // updateQuantity(id: string, quantity: number) {
+  //   const items = this.cartItems().map((item) =>
+  //     item.flower._id === id ? { ...item, quantity } : item,
+  //   );
+  //   this.cartItemsSignal.set(items);
+  // }
+
+  updateQuantity(id: string, quantity: number): { success: boolean; message?: string } {
+    const item = this.cartItems().find((i) => i.flower._id === id);
+
+    if (!item) {
+      return { success: false, message: 'Producto no encontrado' };
+    }
+
+    if (quantity > item.flower.stock) {
+      return {
+        success: false,
+        message: `Solo hay ${item.flower.stock} unidades disponibles`,
+      };
+    }
+
     const items = this.cartItems().map((item) =>
       item.flower._id === id ? { ...item, quantity } : item,
     );
     this.cartItemsSignal.set(items);
+    return { success: true };
   }
 
   clearCart() {

@@ -58,9 +58,18 @@ export class ProductDetail {
   addToCart() {
     const flower = this.flower();
     if (!flower) return;
-    this.cartService.addToCart(flower, this.quantity());
-    this.notificationService.showSuccess(`${flower.name} añadido a la cesta`);
-    this.quantity.set(1);
+    // this.cartService.addToCart(flower, this.quantity());
+    // this.notificationService.showSuccess(`${flower.name} añadido a la cesta`);
+    // this.quantity.set(1);
+
+    const result = this.cartService.addToCart(flower, this.quantity());
+
+    if (result.success) {
+      this.notificationService.showSuccess(`${flower.name} añadido a la cesta`);
+      this.quantity.set(1);
+    } else {
+      this.notificationService.showError(result.message || 'Error al añadir producto');
+    }
   }
 
   goBack() {
