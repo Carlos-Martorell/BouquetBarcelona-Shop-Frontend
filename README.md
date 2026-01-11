@@ -270,25 +270,36 @@ git clone https://github.com/Carlos-Martorell/BouquetBarcelona-Shop-Frontend
 npm install
 ```
 
-### Environment Configuration
+### Environment Setup
 
-Create `src/environments/environment.ts`:
+#### Prerequisites
+
+- Node.js 18+
+- Mapbox account
+
+#### Frontend Configuration
+
+1. Copy the environment template:
+```bash
+cp src/environments/environment.example.ts src/environments/environment.ts
+```
+
+2. Edit `src/environments/environment.ts` and add your Mapbox key:
 ```typescript
 export const environment = {
   production: false,
   apiUrl: 'https://bouquetbarcelona-backend.onrender.com',
-  mapboxKey: 'pk.eyJ1Ijo...' // Obtain from mapbox.com
+  mapboxKey: 'YOUR_MAPBOX_KEY_HERE' // Get from https://account.mapbox.com/access-tokens/
 };
 ```
 
-Create `src/environments/environment.prod.ts`:
-```typescript
-export const environment = {
-  production: true,
-  apiUrl: 'https://bouquetbarcelona-backend.onrender.com',
-  mapboxKey: 'pk.eyJ1Ijo...'
-};
+3. The environment files are automatically generated when you run:
+```bash
+npm start
 ```
+
+**Note:** Never commit `environment.ts` files. Only `environment.example.ts` should be in the repository.
+
 
 ## Development
 
